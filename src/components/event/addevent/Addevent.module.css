@@ -1,0 +1,223 @@
+.form {
+    max-width: 90%;
+    margin-bottom: 400px;
+    margin: 40px auto;
+    background-color: var(--bg-color);
+    box-shadow: 4px 0 4px 4px rgba(0, 0, 0, 0.2);
+
+  color: var(--text-color);
+    padding: 30px;
+    border-radius: 40px;
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds max-height */
+  }
+  .createevent{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+  }
+  .Addeventmain{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Create 2 equal columns */
+    gap: 20px; /* Space between columns and rows */
+  }
+  .formGroup {
+    display: flex;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    flex-direction: column;
+  }
+  /* .Addeventcard{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+  } */
+  .Addevent {
+    /* grid-column: span 2;  */
+    gap: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .imagePreview{
+    width: 20%;
+  }
+  .submitButton,
+  .addButton {
+    grid-column: span 2; /* Make buttons span both columns */
+    padding: 10px 20px;
+    background-color: #eb1b1b;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    margin-top: 20px;
+  }
+  
+  .submitButton {
+    background-color:#ff5069; /* Green for submit button */
+    border-radius: 15px 0 15px 15px ;
+    color: white;
+  }
+  
+  .addButton {
+    background-color: #ff5069; /* Blue for add button */
+    border-radius: 15px 0 15px 15px ;
+    color: white;
+  }
+  .mainbutton{
+    /* justify-content: center; */
+    text-align: center;
+    margin-top: 20px;
+  }
+  .removeAttendeeButton {
+    background-color: #ff5069; /* Red for remove button */
+    color: white;
+    border-radius: 15px 0 15px 15px ;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  h3 {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  
+  label {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  input[type="text"],
+  input[type="email"],
+  input[type="date"],
+  textarea,
+  input[type="file"] {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+  }
+  
+  input[type="file"] {
+    padding: 5px;
+  }
+  
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  input[type="text"]:focus,
+  input[type="email"]:focus,
+  input[type="date"]:focus,
+  textarea:focus {
+    border-color: #f75c2d;
+    outline: none;
+  }
+  
+  input[type="file"]:focus {
+    border-color: #ccc;
+  }
+  
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .attendeeGroup input[type="text"],
+  .attendeeGroup input[type="email"] {
+    margin-bottom: 10px;
+  }
+  
+  
+  
+  
+  .attendeeGroupLeft,
+  .attendeeGroupRight {
+    display: flex;
+    flex-direction: column;
+    width: 48%; /* Adjust width of each attendee block */
+    margin-bottom: 20px;
+  }
+  
+  .attendeeGroupLeft {
+    margin-right: 4%; /* Space between the left and right attendee blocks */
+  }
+  
+  .attendeeGroupRight {
+    margin-left: 4%; /* Space between the left and right attendee blocks */
+  }
+  
+  .attendeeGroupLeft h3,
+  .attendeeGroupRight h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .attendeeGroupLeft .formGroup,
+  .attendeeGroupRight .formGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .attendeeGroupLeft input,
+  .attendeeGroupRight input {
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom: 15px;
+  }
+  
+  .attendeeGroupLeft input[type="file"],
+  .attendeeGroupRight input[type="file"] {
+    padding: 5px;
+  }
+  
+  .attendeeGroupLeft .removeAttendeeButton,
+  .attendeeGroupRight .removeAttendeeButton {
+    background-color: #f44336;
+
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .attendeeGroupLeft,
+    .attendeeGroupRight {
+      width: 100%; /* Stack the attendee fields vertically on mobile */
+      margin-right: 0;
+      margin-left: 0;
+    }
+  
+    .attendeeGroupLeft .removeAttendeeButton,
+    .attendeeGroupRight .removeAttendeeButton {
+      width: 100%; /* Make the remove button span the full width */
+    }
+  }
+  
+  
+  @media (max-width: 768px) {
+    .form {
+      grid-template-columns: 1fr; /* Stack inputs in a single column on smaller screens */
+    }
+  
+    .submitButton,
+    .addButton {
+      grid-column: span 1;
+    }
+  }
+  

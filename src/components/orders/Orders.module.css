@@ -1,0 +1,183 @@
+.Container {
+  padding: 20px;
+  margin: -10px;
+  border-radius: 15px;
+  background-color: var(--bg-color);
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.Header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.SearchInput {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  background: transparent;
+  border: 1px solid #ddd;
+  width: 200px;
+}
+
+.TableContainer {
+  margin-top: 20px;
+  overflow-x: auto;
+}
+
+.Table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.Table th,
+.Table td {
+  padding: 12px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+.EllipsisButton {
+  color: var(--text-color);
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.DropdownMenu {
+  position: absolute;
+  background-color: var(--bg-color);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1;
+  padding: 5px 0;
+  width: 120px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  margin-top: 5px;
+}
+
+.DropdownItem {
+  padding: 5px 10px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+.DropdownItem:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.Button {
+  background-color: #007bff;
+  color: var(--text-color);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.Button:hover {
+  background-color: #0056b3;
+}
+
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ModalContent {
+  background-color: var(--bg-color);
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.ModalContent h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.ModalContent form {
+  display: flex;
+  flex-direction: column;
+}
+
+.ModalContent form label {
+  margin: 10px 0 5px;
+}
+
+.ModalContent form input,
+.ModalContent form select {
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.ModalContent form button {
+  margin-top: 10px;
+  background-color: #28a745;
+}
+
+.ModalContent form button[type="button"] {
+  background-color: #dc3545;
+}
+
+.ModalActions {
+  margin-top: 20px;
+}
+
+.ModalActions button {
+  margin-right: 10px;
+}
+
+/* Responsive Design for Dropdown and Modal */
+@media (max-width: 768px) {
+  .DropdownMenu {
+    width: 100px;
+  }
+
+  .DropdownItem {
+    padding: 5px 8px;
+  }
+
+  .Table th, .Table td {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .SearchInput {
+    width: 150px;
+  }
+
+  .Button {
+    width: 100%;
+  }
+
+  .ModalContent {
+    width: 90%;
+  }
+
+  .ModalContent h3 {
+    font-size: 18px;
+  }
+}

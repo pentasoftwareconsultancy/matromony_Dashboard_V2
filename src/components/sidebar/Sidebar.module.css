@@ -1,0 +1,301 @@
+:root {
+  --bg-color: #34495e;
+  /* Slightly lighter background */
+  --text-color: #ecf0f1;
+  --hover-color: #f39c12;
+  /* Warm hover color */
+  --active-color: #e67e22;
+  /* Active color for better focus */
+  --toggle-bg: #d7b51f;
+  /* Button background for toggle */
+  --border-radius: 20px;
+  /* Soft corner radius */
+}
+
+.Sidebar {
+  max-height: 96vh;
+  background-color: var(--bg-color);
+  display: flex;
+  flex-direction: column;
+  overflow-x: scroll;
+  padding: 10px;
+  position: sticky;
+  top: 10px;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+  border-radius: var(--border-radius);
+  margin-left: 10px;
+  box-sizing: border-box;
+  transition: width 0.3s ease, transform 0.3s ease;
+  width: 500px;
+  z-index: 100;
+}
+
+.Expanded {
+  width: 250px;
+}
+/* .logos{
+  height: 200px;
+  width: 20px;
+} */
+.Collapsed {
+  width: 60px;
+}
+
+.ToggleButton {
+  position: absolute;
+  top: 46px;
+  right: -7px;
+  font-size: 26px;
+  background-color: var(--toggle-bg);
+  color: var(--text-color);
+  width: 40px;
+  height: 46px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.ToggleButton:hover {
+  background-color: #eb7e36;
+  /* Change color on hover */
+}
+
+.Brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.Brand img {
+  width: 100%;
+  height: 35vh;
+  border-radius: 50%;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
+}
+
+.Nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.Link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 16px;
+  padding: 12px 16px;
+  border-radius: 50px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.Icon {
+  font-size: 24px;
+  /* Adjust icon size */
+  transition: transform 0.3s ease;
+}
+
+.Label {
+  flex: 1;
+}
+
+.Link:hover {
+  background-color: var(--hover-color);
+  color: #fff;
+}
+
+.Active {
+  background-color: var(--active-color);
+}
+
+.Logout {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  background-color: #e74c3c;
+  border-radius: 50px;
+  font-size: 16px;
+  padding: 12px 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.LogButton {
+  font-size: 24px;
+  /* Adjust icon size */
+  transition: transform 0.3s ease;
+}
+
+.Logout:hover {
+  background-color: #c0392b;
+  transform: scale(1.05);
+  /* Add hover scale effect */
+}
+
+.Collapsed .Link,
+.Collapsed .Logout {
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+
+.Collapsed .LogButton svg{
+  justify-content: center;
+  padding: 10px px; 
+  font-size: 30px;
+}
+
+.Collapsed .Link .Label {
+  display: none;
+}
+
+/* .Collapsed .Brand img {
+  margin: auto;
+} */
+
+.Collapsed .ToggleButton {
+  transform: translateX(10%);
+}
+
+/* Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .Sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    z-index: 999;
+    flex-direction: column;
+    padding: 10px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .Sidebar.Show {
+    transform: translateX(0);
+  }
+
+  .Collapsed {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .ToggleButton {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
+
+  /* .Brand img {
+    width: 28px;
+    height: 28px;
+  } */
+
+  .Link {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+
+  .Logout {
+    font-size: 14px;
+    padding: 8px 10px;
+  }
+}
+
+/* Tablet (max-width: 768px) */
+@media (max-width: 768px) {
+  .Sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 75%;
+    height: 100%;
+    z-index: 999;
+    flex-direction: column;
+    padding: 15px;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    transform: translateX(-100%);
+  }
+
+  .Sidebar.Show {
+    transform: translateX(0);
+  }
+
+  .Collapsed {
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .ToggleButton {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
+
+  /* .Brand img {
+    width: 30px;
+    height: 30px;
+  } */
+
+  .Link {
+    font-size: 16px;
+  }
+
+  .Logout {
+    font-size: 16px;
+    padding: 12px;
+  }
+}
+
+/* Desktop (min-width: 769px) */
+@media (min-width: 769px) {
+  .Sidebar {
+    position: sticky;
+    top: 10px;
+    bottom: auto;
+    height: auto;
+    flex-direction: column;
+  }
+
+  .Collapsed {
+    flex-direction: column;
+    width: 60px;
+  }
+
+  .ToggleButton {
+    position: absolute;
+    top: 46px;
+    right: -7px;
+  }
+
+  /* .Brand img {
+    width: 36px;
+    height: 36px;
+  } */
+
+  .Link {
+    font-size: 16px;
+  }
+
+  .Logout {
+    font-size: 16px;
+    padding: 12px 15px;
+  }
+}

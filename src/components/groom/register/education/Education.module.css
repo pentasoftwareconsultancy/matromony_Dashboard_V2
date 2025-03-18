@@ -1,0 +1,141 @@
+/* Familyback.module.css */
+
+/* Container for the form */
+.formContainer {
+  /* display: flex; */
+  /* flex-direction: column;
+  justify-content: center;
+  align-items: center; */
+ 
+  padding: 40px;
+  /* min-height: 100vh; */
+  background-color: #f5f5f5;
+}
+.title{
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 10px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 5px;
+}
+/* Title of the form */
+/* .title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+} */
+
+/* Section headings */
+h3 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  
+  color: #333;
+  margin-bottom: 5px;
+  padding-left: 5px;
+}
+
+/* Styling for each form section */
+.section {
+  background-color: #fff;
+  padding-top: 20px;
+  width: 100%;
+  border-radius: 8px;
+ 
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+ 
+}
+.detail{
+  text-align: center;
+  margin-top: 20px;
+}
+.personal{
+  /* width: 100%; */
+  display: grid;
+  padding: 20px;
+  gap: 30px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+/* Form group layout for label and input fields */
+.formGroup {
+  
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+}
+.mainsection{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+}
+/* Label styling */
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Input and select fields styling */
+.input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  border-color: #4CAF50;
+}
+
+/* Submit button styling */
+.submitBtn {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  display: block;
+}
+
+.submitBtn:hover {
+  background-color: #45a049;
+}
+
+.submitBtn:active {
+  background-color: #3e8e41;
+}
+
+/* Responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .formContainer {
+    padding: 20px;
+  }
+
+  .section {
+    padding: 15px;
+  }
+
+  .input {
+    font-size: 0.9rem;
+  }
+
+  .submitBtn {
+    font-size: 1rem;
+    width: 100%;
+  }
+}

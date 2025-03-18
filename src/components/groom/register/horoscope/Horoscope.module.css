@@ -1,0 +1,98 @@
+/* SocialDetailsForm.module.css */
+
+/* Style for the form container */
+.form {
+  /* display: flex;
+  flex-direction: column; */
+  gap: 1rem;
+  padding: 20px;
+  /* max-width: 600px;
+  margin: 0 auto; */
+
+padding-left: 100px;
+padding-right: 100px;
+background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+.main{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+/* Style for the field groups (each section) */
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Style for the labels */
+label {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Style for text input fields */
+.inputText {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.inputText:focus {
+  border-color: #4CAF50;
+}
+
+/* Style for file input fields */
+.inputFile {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.inputFile:focus {
+  border-color: #4CAF50;
+}
+
+/* Style for select dropdown */
+.select {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+/* Style for the submit button */
+.submitButton {
+  padding: 12px 20px;
+  font-size: 1.1rem;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: #45a049;
+}
+
+.submitButton:active {
+  background-color: #3e8e41;
+}
+/* .Horoscope{
+  display: flex;
+  gap: 10px;
+} */

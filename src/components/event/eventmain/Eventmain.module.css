@@ -1,0 +1,74 @@
+.container {
+  padding: 20px;
+  width: 98%;
+margin-top: -30px;
+  transition: width 0.3s ease, transform 0.3s ease;
+  background-color: var(--bg-color);
+  margin-right: -110px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  margin-bottom: 20px;
+  /* background-color: #000; */
+}
+.title{
+  text-align: center;
+  margin-left: 500px;
+
+}
+.buttonadd{
+  justify-content: end;
+  background-color: #ff5069;
+  border-radius: 15px 0 15px 15px;
+  color: white;
+  text-decoration: none;
+  /* text-align: end; */
+  width: 150px;
+}
+.add {
+  display: inline-block;
+  margin-bottom: 15px;
+  justify-content: end;
+  background-color: #ff5069;
+  margin-left: 400px;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-size: 16px;
+}
+
+.add a {
+  color: white;
+  text-decoration: none;
+}
+
+.add:hover {
+  background-color: #f02f4c;
+}
+
+.modeSelector {
+  padding: 5px;
+}
+
+.table_container {
+  margin-top: 20px;
+}
+
+.image {
+  max-width: 100px;
+  height: auto;
+}
+
+.actionButton {
+  color: #000;
+}
+
+.menu {
+  width: 200px;
+}

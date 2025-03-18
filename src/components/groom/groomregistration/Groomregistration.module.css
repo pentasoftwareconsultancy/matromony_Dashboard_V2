@@ -1,0 +1,90 @@
+/* Styling for the form container */
+.form {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px; /* Adds space between columns */
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Form group styling to handle each input field */
+  .formGroup {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Label styling */
+  .formGroup label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+  }
+  
+  /* Input and select field styles */
+  .formGroup input,
+  .formGroup select {
+    width: 100%;
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* File input styling */
+  .formGroup input[type="file"] {
+    padding: 10px;
+  }
+  
+  /* Focus state styling */
+  .formGroup input:focus,
+  .formGroup select:focus {
+    outline-color: #4CAF50;
+    border-color: #4CAF50;
+  }
+  
+  /* Profile photo preview */
+  .formGroup img {
+    margin-top: 10px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+  
+  /* Add responsiveness for small screens */
+  @media (max-width: 768px) {
+    .form {
+      grid-template-columns: 1fr; /* Single column for smaller screens */
+    }
+  }
+  
+  /* Optional: Styling for a button if you want to add a submit button */
+  .submitButton {
+    grid-column: span 3; /* Makes the submit button span across all 3 columns */
+    text-align: center;
+  }
+  
+  .submitButton button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submitButton button:hover {
+    background-color: #45a049;
+  }
+  
+  .submitButton button:disabled {
+    background-color: #ddd;
+    cursor: not-allowed;
+  }
+  
+  

@@ -1,0 +1,170 @@
+/* Theming Variables */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+  --transition-speed: 0.3s;
+}
+
+/* Base styles */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Google Sans', sans-serif;
+  box-sizing: border-box;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  overflow: hidden; /* Prevent body scrolling */
+}
+
+/* Light Mode */
+body[data-theme='light'] {
+  --bg-color: #ffffff;
+  --text-color: #000000;
+}
+
+/* Dark Mode */
+body[data-theme='dark'] {
+  --bg-color: #121212;
+  --text-color: #ffffff;
+}
+
+/* Background Images for Themes with Opacity */
+body[data-bg='nature'] {
+  background-image: url('./assets/images/nature.jpg');
+  opacity: 0.6; /* Apply opacity to background */
+}
+
+body[data-bg='abstract'] {
+  background-image: url('./assets/images/abstract.jpg');
+  opacity: 0.6; /* Apply opacity to background */
+}
+
+body[data-bg='space'] {
+  background-image: url('./assets/images/space.jpg');
+  opacity: 0.6; /* Apply opacity to background */
+}
+
+body[data-bg] {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image var(--transition-speed) ease-in-out, opacity var(--transition-speed) ease-in-out;
+}
+
+/* Global Layout */
+.Container {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  transition: all var(--transition-speed) ease-in-out;
+}
+
+/* Hide scrollbar */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Sidebar Styles */
+.Sidebar {
+  flex: 0 0 20%;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: transform var(--transition-speed) ease-in-out;
+}
+
+.SidebarHidden .Sidebar {
+  transform: translateX(-100%);
+}
+
+/* Main Content */
+.MainContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  color: var(--text-color);
+}
+
+.Navbar {
+  flex-shrink: 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.Page {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  /* Tablets and small laptops */
+  .Sidebar {
+    flex: 0 0 40%; /* Sidebar takes more space on smaller screens */
+  }
+}
+
+@media (max-width: 768px) {
+  /* Small devices like tablets */
+  .Sidebar {
+    flex: 0 0 60%; /* Sidebar takes 60% of the screen */
+  }
+
+  .MainContainer {
+    flex-direction: column; /* Stack main content vertically */
+  }
+
+  .Navbar {
+    flex-direction: column; /* Stack Navbar items vertically */
+    padding: 15px;
+  }
+
+  .Page {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Mobile devices */
+  .Sidebar {
+    flex: 0 0 100%; /* Sidebar takes the full screen */
+    position: absolute;
+    height: 100%;
+    z-index: 2;
+    transform: translateX(-100%); /* Sidebar hidden by default */
+  }
+
+  .SidebarVisible .Sidebar {
+    transform: translateX(0); /* Show sidebar */
+  }
+
+  .Page {
+    padding: 10px;
+  }
+
+  .Navbar {
+    flex-direction: column; /* Stack Navbar items vertically */
+    padding: 20px;
+  }
+
+  .Navbar h2 {
+    font-size: 1.2rem; /* Make the heading smaller */
+  }
+}
+
+@media (max-width: 320px) {
+  /* Extra small devices like some mobile phones */
+  .Navbar {
+    padding: 10px;
+  }
+
+  .Page {
+    padding: 10px;
+  }
+}

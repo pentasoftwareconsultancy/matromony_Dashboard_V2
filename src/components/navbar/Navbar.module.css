@@ -1,0 +1,216 @@
+/* Navbar Container */
+.Container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 20px;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  color: var(--text-color); /* Dynamic text color */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Text Style for Titles */
+.Text h5 {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Search Bar Styling */
+.Search {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--secondary-color); /* Dynamic border color */
+  border-radius: 25px;
+  border: 1px solid;
+  padding: 5px 15px;
+  width: 320px;
+  transition: border-color 0.3s ease;
+}
+
+.Search input {
+  border: none;
+  outline: none;
+  background: transparent;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 1rem;
+  color: var(--text-color); /* Dynamic text color */
+}
+
+.Search input::placeholder {
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.SearchIcon {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+/* Icons Container */
+.Icons {
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+/* Icon Styling */
+.IconWrapper {
+  position: relative;
+}
+
+.Icon {
+  font-size: 1.7rem;
+  color: var(--text-color); /* Dynamic text color */
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.Icon:hover {
+  color: #1a73e8; /* Hover effect */
+}
+
+/* Badge Styling */
+.Badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  background-color: var(--badge-color, #ff5252); /* Customizable badge color */
+  color: #fff;
+  font-size: 0.8rem;
+  padding: 2px 6px;
+  border-radius: 50%;
+  font-weight: bold;
+}
+
+/* Profile Section */
+.ProfileDropdown {
+  position: absolute;
+  top: 50px; 
+  right: 10px;
+  border-radius: 15px;
+  background-color: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  display: none; 
+  z-index: 1000;
+}
+
+.ProfileDropdown ul {
+  list-style-type: none;
+  padding: 10px;
+  margin: 0;
+}
+
+.ProfileDropdown li {
+  padding: 8px 15px;
+  cursor: pointer;
+}
+
+.ProfileDropdown li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Show the dropdown when profileDropdown is true */
+.Profile > .ProfileDropdown {
+  display: block;
+}
+
+/* Theme Selector */
+.ThemeSelector {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ThemeDropdown {
+  padding: 8px;
+  background-color: var(--bg-color); /* Dynamic background color */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: inherit;
+  font-size: 1rem;
+  outline: none;
+  width: 150px;
+  transition: border-color 0.3s ease;
+}
+
+.ThemeDropdown:hover {
+  border-color: #1a73e8;
+}
+
+.ThemeDropdown optgroup {
+  font-weight: bold;
+}
+
+.ThemeDropdown option {
+  background: inherit;
+  color: inherit;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Search {
+    width: 250px; /* Smaller search bar on tablets */
+  }
+
+  .Icons {
+    gap: 15px;
+  }
+
+  .ProfileName {
+    display: none; /* Hides profile name on tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  /* Hides the search bar on small screens */
+  .Search {
+    display: none;
+  }
+
+  .Icons {
+    gap: 10px; /* Adjusts icon spacing */
+  }
+
+  /* Menu Toggle */
+  .MenuToggle {
+    display: block;
+    font-size: 1.5rem;
+    color: var(--text-color); /* Dynamic text color for the menu toggle */
+  }
+
+  /* Mobile Nav Menu */
+  .MobileNav {
+    display: none;
+    flex-direction: column;
+    background-color: var(--bg-color);
+    width: 100%;
+    padding: 10px;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .MobileNav.active {
+    display: flex;
+  }
+
+  .MobileNavItem {
+    padding: 10px;
+    font-size: 1rem;
+    color: var(--text-color);
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .MobileNavItem:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
+

@@ -1,0 +1,106 @@
+.formContainer {
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
+  gap: 16px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 10px;
+}
+.main{
+   display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+.work{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.social{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+.heading {
+  grid-column: span 3;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+.profile{
+  height: 60px;
+}
+.email{
+  height: 60px;
+}
+.bio{
+  height: 30px;
+}
+.message {
+  grid-column: span 3;
+  text-align: center;
+  /* color: green; */
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+input[type="file"] {
+  padding: 5px;
+}
+
+textarea {
+  height: 80px;
+}
+
+.addwork {
+  grid-column: span 3;
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color:#ff5069;
+
+  color: white;
+  border: none;
+  border-radius: 15px 0 15px 15px;
+  cursor: pointer;
+}
+.submit{
+  grid-column: span 3;
+  padding: 10px 15px;
+  font-size: 18px;
+  background-color:#ff5069;
+
+  color: white;
+  border: none;
+  border-radius: 15px 0 15px 15px;
+  cursor: pointer;
+}
+.submit:hover{
+  background-color:#f72847;
+}
+.addwork:hover {
+  background-color:#f72847;
+}
+
+/* Styling for the work section */
+.workContainer {
+  grid-column: span 3;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.workItem {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+}

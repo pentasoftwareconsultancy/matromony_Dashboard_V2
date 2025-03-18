@@ -1,0 +1,192 @@
+
+.Container {
+  padding: 20px;
+  margin: -10px;
+  background-color: var(--bg-color); 
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+  border-radius: 15px;
+  position: relative; /* Ensure proper positioning of dropdown */
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: bold;
+  color:var(--text-color);
+  text-align: center;
+}
+
+input[type="text"] {
+  padding: 8px;
+  margin: 10px 0;
+  width: 200px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+input[type="text"]:focus {
+  border-color: #007bff;
+}
+
+select {
+  padding: 8px;
+  margin-left: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color:var(--bg-color);
+}
+
+td {
+  font-size: 14px;
+}
+
+/* Button Styles */
+button {
+  padding: 10px 16px;
+  margin: 5px;
+  background-color:#007bff;
+  color:#f5f5f7;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.EllipsisButton {
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color:var(--text-color);
+  margin-left: 10px;
+}
+
+.EllipsisButton:hover {
+  background: transparent;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+/* Dropdown Styles */
+.Dropdown {
+  position: absolute;
+  background-color:var(--bg-color);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  z-index: 1;
+  padding: 5px 0;
+  width: 120px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+}
+
+.Dropdown button {
+  background: none;
+  color: var(--text-color);
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  text-align: left;
+  width: 100%;
+  transition: background-color 0.3s ease;
+}
+
+
+/* Centering the message when no customers are found */
+td[colspan="4"] {
+  text-align: center;
+  font-style: italic;
+  color: #888;
+}
+
+/* Add Customer Form Styling */
+.Popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.PopupContent {
+  background-color: var(--bg-color);
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.PopupContent h3 {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 22px;
+}
+
+.PopupContent form {
+  display: flex;
+  flex-direction: column;
+}
+
+.PopupContent form label {
+  margin: 10px 0 5px;
+}
+
+.PopupContent form input,
+.PopupContent form select {
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.PopupContent form button {
+  margin-top: 10px;
+  background-color: #28a745;
+}
+
+.PopupContent form button[type="button"] {
+  background-color: #dc3545;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .Container {
+    padding: 15px;
+  }
+
+  table {
+    font-size: 12px;
+  }
+
+  .PopupContent {
+    width: 90%;
+  }
+
+  .PopupContent h3 {
+    font-size: 18px;
+  }
+}
