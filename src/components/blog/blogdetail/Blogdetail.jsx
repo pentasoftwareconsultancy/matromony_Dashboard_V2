@@ -68,7 +68,7 @@ const Blogdetail = () => {
           </p>
         </div>
         {/* Left Side - Additional Card */}
-        <div className={styles.leftCard}>
+        {/* <div className={styles.leftCard}>
           <h2 className={styles.blog}>LATEST BLOGS</h2>
           <h3 className={styles.cantentmain}>{blog.cantentcard || "Uncategorized"}</h3>
           <hr />
@@ -76,7 +76,7 @@ const Blogdetail = () => {
           <hr />
           <h3 className={styles.cantentmain}>{blog.cantentmain}</h3>
           <p className={styles.react}><Link to="/blogmain">READ ALL BLOGS</Link></p>
-        </div>
+        </div> */}
 
         {/* Right Side - Blog Main Card */}
       

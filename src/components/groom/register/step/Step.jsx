@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
+import { useNavigate } from "react-router-dom";
 import styles from "./Step.module.css";
 import Profile from "../profile/Profile";
 import FamilyBackground from "../familyback/Familyback";
@@ -7,7 +7,7 @@ import Education from "../education/Education";
 import Horoscope from "../horoscope/Horoscope";
 
 const Stepmain = () => {
-  const navigate = useNavigate(); // Initialize navigation
+  const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
 
   const initialFormData = {
@@ -17,7 +17,7 @@ const Stepmain = () => {
     password: "",
     dateOfBirth: "",
     city: "",
-    gender: "", // To check whether to go to Groom or Bride page
+    gender: "",
     maritalStatus: "",
     height: "",
     bodyType: "",
@@ -42,118 +42,147 @@ const Stepmain = () => {
     profilePhoto: "",
     aadharNumber: "",
     aadharPhoto: "",
-    isApproved: false, // By default, user is not approved
+    isApproved: false,
   };
 
+  // State to store form data
   const [formData, setFormData] = useState(() => {
     const savedData = localStorage.getItem("formData");
     return savedData ? JSON.parse(savedData) : initialFormData;
   });
 
+  // State to track which steps are validated and complete
+  const [completedSteps, setCompletedSteps] = useState([]);
+
+  // Save form data to localStorage
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
 
-  const validateForm = () => {
-    for (const key in formData) {
-      if (typeof formData[key] === "string" && formData[key].trim() === "") {
-        console.log(`❌ Empty field found: ${key}`);
+  // Validate each step to allow marking as complete
+  const validateStep = (stepId) => {
+    switch (stepId) {
+      case 1:
+        return formData.fullName && formData.email && formData.mobileNumber;
+      case 2:
+        return formData.educationLevel && formData.educationField;
+      case 3:
+        return formData.fatherName && formData.motherName;
+      case 4:
+        return formData.religion && formData.isManglik !== "";
+      default:
         return false;
-      }
-    }
-    return true;
-  };
-
-  const handleSubmit = async () => {
-    if (!validateForm()) {
-      alert("⚠️ Please complete all steps before submitting.");
-      return;
-    }
-
-    const formDataToSend = new FormData();
-
-    // Append non-file fields
-    Object.entries(formData).forEach(([key, value]) => {
-      if (value && key !== "profilePhoto" && key !== "aadharPhoto") {
-        formDataToSend.append(key, value);
-      }
-    });
-
-    // Append file fields
-    if (formData.profilePhoto instanceof File) {
-      formDataToSend.append("profilePhoto", formData.profilePhoto);
-    } else {
-      console.warn("⚠️ Profile Photo is missing or not a valid File object");
-    }
-
-    if (formData.aadharPhoto instanceof File) {
-      formDataToSend.append("aadharPhoto", formData.aadharPhoto);
-    } else {
-      console.warn("⚠️ Aadhar Photo is missing or not a valid File object");
-    }
-
-    try {
-      const response = await fetch("http://localhost:8000/api/v1/bride-groom/create", {
-        method: "POST",
-        body: formDataToSend,
-      });
-
-      const responseText = await response.text(); // Read response as text
-      
-      if (!response.ok) {
-        throw new Error(`Server responded with ${response.status}: ${responseText}`);
-      }
-
-      const result = JSON.parse(responseText);
-      alert("🎉 Registration successful!");
-
-      // Redirect based on gender
-      if (formData.gender.toLowerCase() === "male") {
-        navigate("/Groommain");
-      } else if (formData.gender.toLowerCase() === "female") {
-        navigate("/bridemain");
-      } else {
-        alert("⚠️ Invalid gender selection. Please check your input.");
-      }
-    } catch (error) {
-      console.error("❌ Submission failed:", error);
-      alert("❌ Submission failed: " + error.message);
     }
   };
 
+  // Handle next step and mark step as complete if valid
+  const handleNext = () => {
+    if (validateStep(currentStep)) {
+      if (!completedSteps.includes(currentStep)) {
+        setCompletedSteps((prev) => [...prev, currentStep]);
+      }
+      setCurrentStep((prev) => prev + 1);
+    } else {
+      alert("⚠️ Please complete the current step before proceeding.");
+    }
+  };
+
+  // Handle going to the previous step
+  const handlePrevious = () => {
+    setCurrentStep((prev) => prev - 1);
+  };
+
+  // Array of steps with respective components
   const steps = [
-    { id: 1, label: "1", component: <Profile formData={formData} setFormData={setFormData} /> },
-    { id: 2, label: "2", component: <Education formData={formData} setFormData={setFormData} /> },
-    { id: 3, label: "3", component: <FamilyBackground formData={formData} setFormData={setFormData} /> },
-    { id: 4, label: "4", component: <Horoscope formData={formData} setFormData={setFormData} /> },
+    {
+      id: 1,
+      label: "1",
+      title: "Profile",
+      component: <Profile formData={formData} setFormData={setFormData} />,
+    },
+    {
+      id: 2,
+      label: "2",
+      title: "Education",
+      component: <Education formData={formData} setFormData={setFormData} />,
+    },
+    {
+      id: 3,
+      label: "3",
+      title: "Family",
+      component: (
+        <FamilyBackground formData={formData} setFormData={setFormData} />
+      ),
+    },
+    {
+      id: 4,
+      label: "4",
+      title: "Document",
+      component: <Horoscope formData={formData} setFormData={setFormData} />,
+    },
   ];
+
 
   return (
     <div className={styles.stepContainer}>
+      {/* Step bar with connected steps */}
       <div className={styles.stepBar}>
-        {steps.map((step) => (
-          <div
-            key={step.id}
-            className={`${styles.step} ${currentStep === step.id ? styles.active : ""}`}
-            onClick={() => setCurrentStep(step.id)}
-          >
-            {currentStep === step.id ? "⭐" : "☆"} {step.label}
+        {steps.map((step, index) => (
+          <div key={step.id} className={styles.stepWrapper}>
+            {/* Step Title Added Here */}
+
+            <div className={styles.numTitle}>
+              <div className={styles.stepTitle}>{step.title}</div>
+
+              {/* Step Number/Indicator */}
+              <div
+                className={`${styles.step} ${currentStep === step.id ? styles.active : ""
+                  } ${completedSteps.includes(step.id) ? styles.completed : ""}`}
+                onClick={() => setCurrentStep(step.id)}
+              >
+                {completedSteps.includes(step.id) ? "✅" : step.label}
+              </div>
+            </div>
+
+            {/* Progress Line */}
+            {index < steps.length - 1 && (
+              <div
+                className={`${styles.progressLine} ${completedSteps.includes(step.id) ? styles.filled : ""
+                  }`}
+              />
+            )}
           </div>
         ))}
       </div>
+
+
+      {/* Step content */}
       <div className={styles.stepContent}>
         {steps.find((step) => step.id === currentStep)?.component}
       </div>
+
+      {/* Action buttons */}
       <div className={styles.stepActions}>
-        <button className={styles.previous} onClick={() => setCurrentStep(currentStep - 1)} disabled={currentStep === 1}>
+        <button
+          className={styles.previous}
+          onClick={handlePrevious}
+          disabled={currentStep === 1}
+        >
           Previous
         </button>
         {currentStep === steps.length ? (
-          <button className={styles.submit} onClick={handleSubmit}>
+          <button
+            className={styles.submit}
+            onClick={() =>
+              alert(
+                "🎉 All steps completed successfully! Form submitted."
+              )
+            }
+          >
             Submit
           </button>
         ) : (
-          <button className={styles.next} onClick={() => setCurrentStep(currentStep + 1)}>
+          <button className={styles.next} onClick={handleNext}>
             Next
           </button>
         )}

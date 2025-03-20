@@ -36,6 +36,7 @@ const Profile = ({ formData, setFormData, setIsFormValid }) => {
       }
     };
     fetchCountries();
+    
   }, []);
 
   useEffect(() => {

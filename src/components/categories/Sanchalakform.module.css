@@ -1,106 +1,170 @@
-.formContainer {
-  /* display: grid;
-  grid-template-columns: repeat(3, 1fr); */
-  gap: 16px;
-  max-width: 1200px;
-  margin: auto;
-  padding: 10px;
-}
-.main{
-   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
-}
-.work{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-.social{
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 40px;
-}
-.heading {
-  grid-column: span 3;
-  text-align: center;
-  font-size: 24px;
-  font-weight: bold;
-}
-.profile{
-  height: 60px;
-}
-.email{
-  height: 60px;
-}
-.bio{
-  height: 30px;
-}
-.message {
-  grid-column: span 3;
-  text-align: center;
-  /* color: green; */
+/* Sanchalakform.module.css */
+
+/* Container Styles */
+.form {
+  max-width: 900px;
+  width: 100%;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: rgb(206, 206, 206) solid 2px;
 }
 
-input,
+/* Flexbox for Grouping Inputs */
+.FirstGroup {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+
+/* Heading Styles */
+.form h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 25px;
+  font-size: 24px;
+}
+
+/* Input and Textarea Styles */
+input[type="text"],
+input[type="email"],
+input[type="date"],
+input[type="file"],
 textarea {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
+  margin-bottom: 15px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 6px;
   font-size: 16px;
+  transition: all 0.3s ease;
+  background-color: #fff;
 }
 
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="date"]:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* File Upload Style */
 input[type="file"] {
   padding: 5px;
 }
 
-textarea {
-  height: 80px;
-}
-
-.addwork {
-  grid-column: span 3;
-  padding: 10px 15px;
-  font-size: 18px;
-  background-color:#ff5069;
-
+/* Button Styles */
+.full-width-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 15px 0 15px 15px;
+  border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
-.submit{
-  grid-column: span 3;
-  padding: 10px 15px;
-  font-size: 18px;
-  background-color:#ff5069;
 
-  color: white;
+.full-width-button:hover {
+  background-color: #0056b3;
+}
+
+.full-width-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Add/Remove Work Buttons */
+.add-work-button,
+.remove-work-button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 10px;
   border: none;
-  border-radius: 15px 0 15px 15px;
+  border-radius: 6px;
+  font-size: 16px;
   cursor: pointer;
-}
-.submit:hover{
-  background-color:#f72847;
-}
-.addwork:hover {
-  background-color:#f72847;
+  transition: background-color 0.3s ease;
 }
 
-/* Styling for the work section */
-.workContainer {
-  grid-column: span 3;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+.add-work-button {
+  background-color: #28a745;
+  color: white;
 }
 
-.workItem {
+.add-work-button:hover {
+  background-color: #218838;
+}
+
+.remove-work-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.remove-work-button:hover {
+  background-color: #c82333;
+}
+
+/* Work Entry Styles */
+.work-entry {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: #fff;
+}
+
+.work-entry input,
+.work-entry textarea {
+  margin-bottom: 10px;
+}
+
+/* Social Links Container */
+.social-links {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   gap: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.social-links input {
+  flex: 1;
+}
+
+/* Loading and Submit Button */
+.loading {
+  opacity: 0.7;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .form {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  input,
+  textarea {
+    font-size: 14px;
+  }
+
+  .add-work-button,
+  .remove-work-button,
+  .full-width-button {
+    font-size: 14px;
+    padding: 10px;
+  }
 }

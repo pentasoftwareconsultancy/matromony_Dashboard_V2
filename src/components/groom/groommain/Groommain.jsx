@@ -2,8 +2,8 @@ import React, { useState, useMemo, useEffect } from "react";
 import { MaterialReactTable } from "material-react-table";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
+import styles from "./Groommain.module.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import style from "./Groommain.module.css";
 import { Link } from "react-router-dom";
 
 const Groommain = () => {
@@ -18,7 +18,7 @@ const Groommain = () => {
     () =>
       createTheme({
         palette: {
-          mode: "dark",
+          // Customize theme if needed
         },
       }),
     []
@@ -80,7 +80,7 @@ const Groommain = () => {
             <img
               src={cell.getValue()}
               alt="Profile"
-              className={style.imagemain}
+              className={styles.imagemain}
             />
           ) : (
             "No Image"
@@ -91,10 +91,10 @@ const Groommain = () => {
         header: "Actions",
         Cell: ({ row }) => (
           <div
-            className={style.actionsContainer}
+            className={styles.actionsContainer}
             onClick={(event) => handleThreeDotsClick(event, row)}
           >
-            <button className={style.threeDotsButton}>...</button>
+            <button className={styles.threeDotsButton}>...</button>
           </div>
         ),
       },
@@ -103,40 +103,42 @@ const Groommain = () => {
   );
 
   return (
-    <div className={style.table_container}>
+    <div className={styles.table_container}>
       <ThemeProvider theme={theme}>
-        <div className={style.groommain}><Link to="/addprofile"> AddGroom</Link></div>
-        <h2 className={style.title}>Grooms</h2>
+        <div className={styles.groommain}>
+          <Link to="/addprofile">Add Groom</Link>
+        </div>
+        <h2 className={styles.title}>Grooms</h2>
         {isLoading ? (
-          <div className={style.loader}>
+          <div className={styles.loader}>
             <CircularProgress />
           </div>
         ) : error ? (
-          <div className={style.error}>
+          <div className={styles.error}>
             <p>{error}</p>
           </div>
         ) : (
           <MaterialReactTable
             columns={columns}
             data={data}
-            className={style.tablemain}
+            className={styles.tablemain}
           />
         )}
         {popupVisible && popupPosition && (
           <div
-            className={style.popup}
+            className={styles.popup}
             style={{
               top: popupPosition.top,
               left: popupPosition.left,
             }}
           >
-            <div className={style.popupOption}>View</div>
-            <div className={style.popupOption}>Edit</div>
-            <div className={style.popupOption}>Delete</div>
+            <div className={styles.popupOption}>View</div>
+            <div className={styles.popupOption}>Edit</div>
+            <div className={styles.popupOption}>Delete</div>
           </div>
         )}
         {popupVisible && (
-          <div className={style.overlay} onClick={closePopup}></div>
+          <div className={styles.overlay} onClick={closePopup}></div>
         )}
       </ThemeProvider>
     </div>

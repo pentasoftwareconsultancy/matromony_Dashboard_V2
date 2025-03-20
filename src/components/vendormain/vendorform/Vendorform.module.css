@@ -1,29 +1,26 @@
 /* VendorForm.module.css */
 
+/* Form Container */
 .form {
-  max-width: 900px;
-  margin: 0 auto;
+  max-width: 1000px;
+  margin: 20px auto;
   padding: 20px;
   background-color: #f9f9f9;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Input Group */
 .inputGroup {
   display: flex;
   flex-direction: column;
-  /* gap: 50px; */
   margin-bottom: 15px;
 }
-.file{
-  gap: 50px;
-margin-left: 20px;
-margin-right: 50px;
-}
+
 .inputGroup label {
   font-weight: bold;
-  
   margin-bottom: 5px;
+  font-size: 14px;
 }
 
 .inputGroup input,
@@ -32,6 +29,7 @@ margin-right: 50px;
   border: 1px solid #ccc;
   border-radius: 4px;
   font-size: 16px;
+  outline: none;
 }
 
 .inputGroup select {
@@ -42,35 +40,34 @@ margin-right: 50px;
   width: 20px;
   height: 20px;
   margin-right: 10px;
+  cursor: pointer;
 }
 
+/* File Input */
+.file {
+  display: flex;
+  gap: 50px;
+  margin-left: 20px;
+  margin-right: 50px;
+}
+
+/* Submit Button */
 .submitButton {
   padding: 12px 20px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  transition: background-color 0.3s;
 }
 
 .submitButton:hover {
   background-color: #45a049;
 }
 
-/* button[type="button"] {
-  background-color: #008CBA;
-  color: white;
-  padding: 8px 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 10px;
-} */
-
-/* button[type="button"]:hover {
-  background-color: #007B9F;
-} */
+/* Checkbox Group */
 .checkboxGroup {
   display: flex;
   flex-wrap: wrap;
@@ -84,21 +81,22 @@ margin-right: 50px;
   cursor: pointer;
 }
 
-/* Grid layout for form */
+/* Grid Layout for Main Form */
 .main {
+ 
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
+  grid-template-columns: repeat(2, 1fr); /* 3 equal columns */
   gap: 20px;
 }
-.addgallery{
+
+/* Gallery Section */
+.addgallery {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
 }
-.inputGroup {
-  grid-column: span 1; /* Each input group spans 1 column */
-}
-/* VendorForm.module.css */
+
+/* Success Popup */
 .successPopup {
   position: fixed;
   top: 20px;
@@ -112,9 +110,20 @@ margin-right: 50px;
   z-index: 999;
 }
 
-/* Responsive design for small screens */
+/* Responsive Design for Small Screens */
 @media (max-width: 768px) {
-  .form {
-    grid-template-columns: 1fr; /* 1 column on smaller screens */
+  .main {
+    grid-template-columns: 1fr; /* 1 column layout on smaller screens */
+  }
+
+  .addgallery {
+    grid-template-columns: 1fr;
+  }
+
+  .file {
+    flex-direction: column;
+    gap: 20px;
+    margin-left: 0;
+    margin-right: 0;
   }
 }

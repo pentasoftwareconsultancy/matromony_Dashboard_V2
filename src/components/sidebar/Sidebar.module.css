@@ -1,70 +1,74 @@
 :root {
   --bg-color: #34495e;
-  /* Slightly lighter background */
   --text-color: #ecf0f1;
   --hover-color: #f39c12;
-  /* Warm hover color */
   --active-color: #e67e22;
-  /* Active color for better focus */
   --toggle-bg: #d7b51f;
-  /* Button background for toggle */
   --border-radius: 20px;
-  /* Soft corner radius */
 }
 
 .Sidebar {
-  max-height: 96vh;
+  height: 100vh;
   background-color: var(--bg-color);
   display: flex;
   flex-direction: column;
-  overflow-x: scroll;
+  overflow-x: hidden;
   padding: 10px;
   position: sticky;
-  top: 10px;
+  top: 0;
   box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
   border-radius: var(--border-radius);
   margin-left: 10px;
   box-sizing: border-box;
   transition: width 0.3s ease, transform 0.3s ease;
-  width: 500px;
-  z-index: 100;
+  width: 250px;
+  z-index: 1000;
 }
 
-.Expanded {
-  width: 250px;
-}
-/* .logos{
-  height: 200px;
-  width: 20px;
-} */
 .Collapsed {
   width: 60px;
 }
 
+/* Toggle Button - Positioned at the top */
 .ToggleButton {
-  position: absolute;
-  top: 46px;
-  right: -7px;
-  font-size: 26px;
-  background-color: var(--toggle-bg);
-  color: var(--text-color);
-  width: 40px;
-  height: 46px;
+  position: absolute; /* Fixed inside sidebar */
+  top: 15px;
+  left: 15px; /* Default position when collapsed */
+  font-size: 20px;
+  background-color: var(--toggle-bg, #f1f1f1);
+  color: var(--text-color, #333);
+  width: 36px;
+  height: 36px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   cursor: pointer;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease-in-out;
 }
 
+/* Toggle Button when Expanded - Shifted to the Left */
+.Expanded .ToggleButton {
+  left: 210px; /* Positioned inside the expanded sidebar */
+  transform: rotate(0deg);
+}
+
+/* Toggle Button when Collapsed - Centered */
+.Collapsed .ToggleButton {
+  left: 20px; /* Centered when collapsed */
+  transform: rotate(180deg);
+  top: 10px;
+}
+
+
+/* Hover Effect for Toggle Button */
 .ToggleButton:hover {
-  background-color: #eb7e36;
-  /* Change color on hover */
+  background-color: var(--hover-color);
 }
 
+/* Brand Section */
 .Brand {
   display: flex;
   justify-content: center;
@@ -75,22 +79,34 @@
 }
 
 .Brand img {
-  width: 100%;
-  height: 35vh;
+  width: 70%; /* Default width when expanded */
+  height: auto;
   border-radius: 50%;
-  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); */
+  transition: width 0.3s ease;
 }
 
+/* Logo when Sidebar is Collapsed */
+.Collapsed .Brand img {
+  width: 50px; /* Smaller size when collapsed */
+  height: 900px;
+  border-radius: 50%;
+  margin-top: 30px;
+}
+
+
+/* Nav Section */
 .Nav {
   flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 10px;
 }
 
 .Link {
   display: flex;
   align-items: center;
   gap: 15px;
+  
   color: var(--text-color);
   text-decoration: none;
   font-size: 16px;
@@ -101,14 +117,16 @@
 
 .Icon {
   font-size: 24px;
-  /* Adjust icon size */
   transition: transform 0.3s ease;
 }
 
 .Label {
   flex: 1;
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
 }
 
+/* Hover and Active States */
 .Link:hover {
   background-color: var(--hover-color);
   color: #fff;
@@ -118,58 +136,47 @@
   background-color: var(--active-color);
 }
 
-.Logout {
+/* Dropdown Styles */
+.Dropdown {
   display: flex;
-  align-items: center;
-  color: var(--text-color);
-  background-color: #e74c3c;
-  border-radius: 50px;
-  font-size: 16px;
-  padding: 12px 15px;
+  justify-content: space-between;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.LogButton {
-  font-size: 24px;
-  /* Adjust icon size */
-  transition: transform 0.3s ease;
+.DropdownContent {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.Logout:hover {
-  background-color: #c0392b;
-  transform: scale(1.05);
-  /* Add hover scale effect */
-}
-
-.Collapsed .Link,
-.Collapsed .Logout {
-  align-items: center;
-  justify-content: center;
-  padding: 10px 12px;
+.SubLink {
+  padding-left: 20px;
   font-size: 14px;
 }
 
-.Collapsed .LogButton svg{
+/* Collapsed Styles */
+.Collapsed .Link {
   justify-content: center;
-  padding: 10px px; 
-  font-size: 30px;
+  padding: 12px;
+  font-size: 14px;
 }
 
 .Collapsed .Link .Label {
   display: none;
 }
 
-/* .Collapsed .Brand img {
-  margin: auto;
-} */
-
-.Collapsed .ToggleButton {
-  transform: translateX(10%);
+.Collapsed .Brand img {
+  width: 35px;
+  height: 35px;
 }
 
-/* Mobile (max-width: 480px) */
-@media (max-width: 480px) {
+.Collapsed .ToggleButton {
+  right: -25px;
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
   .Sidebar {
     position: fixed;
     top: 0;
@@ -177,11 +184,6 @@
     width: 80%;
     height: 100%;
     z-index: 999;
-    flex-direction: column;
-    padding: 10px;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
@@ -192,110 +194,42 @@
 
   .Collapsed {
     width: 100%;
-    flex-direction: column;
   }
 
   .ToggleButton {
     position: fixed;
     top: 10px;
     left: 10px;
+    z-index: 1001;
   }
-
-  /* .Brand img {
-    width: 28px;
-    height: 28px;
-  } */
 
   .Link {
     font-size: 14px;
-    padding: 8px 10px;
+    padding: 10px;
   }
 
   .Logout {
     font-size: 14px;
-    padding: 8px 10px;
+    padding: 10px;
   }
 }
 
-/* Tablet (max-width: 768px) */
-@media (max-width: 768px) {
+/* Tablet Styles */
+@media (max-width: 1024px) {
   .Sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 75%;
-    height: 100%;
-    z-index: 999;
-    flex-direction: column;
-    padding: 15px;
-    margin: 0;
-    border-radius: 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    transform: translateX(-100%);
-  }
-
-  .Sidebar.Show {
-    transform: translateX(0);
   }
 
   .Collapsed {
-    width: 100%;
-    flex-direction: column;
-  }
-
-  .ToggleButton {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-  }
-
-  /* .Brand img {
-    width: 30px;
-    height: 30px;
-  } */
-
-  .Link {
-    font-size: 16px;
-  }
-
-  .Logout {
-    font-size: 16px;
-    padding: 12px;
-  }
-}
-
-/* Desktop (min-width: 769px) */
-@media (min-width: 769px) {
-  .Sidebar {
-    position: sticky;
-    top: 10px;
-    bottom: auto;
-    height: auto;
-    flex-direction: column;
-  }
-
-  .Collapsed {
-    flex-direction: column;
     width: 60px;
   }
 
-  .ToggleButton {
-    position: absolute;
-    top: 46px;
-    right: -7px;
-  }
-
-  /* .Brand img {
-    width: 36px;
-    height: 36px;
-  } */
-
   .Link {
-    font-size: 16px;
+    font-size: 14px;
   }
 
-  .Logout {
-    font-size: 16px;
-    padding: 12px 15px;
+  .ToggleButton {
+    top: 15px;
+    left: 10px;
   }
 }

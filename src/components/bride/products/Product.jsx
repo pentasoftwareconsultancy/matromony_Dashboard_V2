@@ -18,7 +18,7 @@ const Product = () => {
     () =>
       createTheme({
         palette: {
-          mode: "dark",
+          // mode: "dark",
         },
       }),
     []

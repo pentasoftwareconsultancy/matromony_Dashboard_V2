@@ -158,38 +158,43 @@ const Sanchalakform = () => {
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
       <h2>{isEditing ? "Edit Sanchalak" : "Create Sanchalak"}</h2>
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        placeholder="Name"
-        required
-      />
-      <input
-        type="text"
-        name="designation"
-        value={formData.designation}
-        onChange={handleChange}
-        placeholder="Designation"
-        required
-      />
-      <input
-        type="text"
-        name="phone"
-        value={formData.phone}
-        onChange={handleChange}
-        placeholder="Phone"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        value={formData.email}
-        onChange={handleChange}
-        placeholder="Email"
-        required
-      />
+      <div className={styles.FirstGroup}>
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          placeholder="Name"
+          required
+        />
+        <input
+          type="text"
+          name="designation"
+          value={formData.designation}
+          onChange={handleChange}
+          placeholder="Designation"
+          required
+        />
+      </div>
+
+      <div className={styles.FirstGroup}>
+        <input
+          type="text"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          placeholder="Phone"
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          placeholder="Email"
+          required
+        />
+      </div>
       <input type="file" name="profilePic" onChange={handleChange} />
       <textarea
         name="bio"
@@ -197,20 +202,24 @@ const Sanchalakform = () => {
         onChange={handleChange}
         placeholder="Short Bio"
       />
-      <input
-        type="text"
-        name="address"
-        value={formData.address}
-        onChange={handleChange}
-        placeholder="Address"
-      />
-      <input
-        type="date"
-        name="birthData"
-        value={formData.birthData}
-        onChange={handleChange}
-        required
-      />
+
+      <div className={styles.FirstGroup}>
+        <input
+          type="text"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          placeholder="Address"
+        />
+        <input
+          type="date"
+          name="birthData"
+          value={formData.birthData}
+          onChange={handleChange}
+          required
+        />
+      </div>
+
       <input
         type="text"
         name="place"
@@ -225,20 +234,23 @@ const Sanchalakform = () => {
         onChange={handleChange}
         placeholder="Detailed Description"
       />
-      <input
-        type="text"
-        name="education"
-        value={formData.education}
-        onChange={handleChange}
-        placeholder="Education"
-      />
-      <input
-        type="text"
-        name="role"
-        value={formData.role}
-        onChange={handleChange}
-        placeholder="Role"
-      />
+
+      <div className={styles.FirstGroup}>
+        <input
+          type="text"
+          name="education"
+          value={formData.education}
+          onChange={handleChange}
+          placeholder="Education"
+        />
+        <input
+          type="text"
+          name="role"
+          value={formData.role}
+          onChange={handleChange}
+          placeholder="Role"
+        />
+      </div>
       {Array.isArray(formData.work) && formData.work.map((work, index) => (
         <div key={index}>
           <input

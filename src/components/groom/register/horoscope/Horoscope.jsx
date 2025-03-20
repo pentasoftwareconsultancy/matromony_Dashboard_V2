@@ -14,7 +14,7 @@ const Horoscope = ({ formData, setFormData }) => {
       ...prevData,
       [name]: value,
     }));
-
+    
     setFormData((prevData) => ({
       ...prevData,
       horoscope: {
