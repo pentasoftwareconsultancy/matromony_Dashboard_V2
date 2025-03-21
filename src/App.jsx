@@ -30,6 +30,7 @@ import Stepmain from "./components/groom/register/step/Step";
 import Notificationmain from "./components/notification/notificationmain/Notificationmain";
 import ProfileComponent from "./components/bride/profilecomponent/ProfileComponent";
 import AddEventImage from "./components/event/addeventimage/AddEventImage";
+import Addimage from "./components/event/addimage/Addimage";
 // import EditProfile from "./components/profile/EditProfile"; // Added EditProfile
 
 
@@ -83,6 +84,7 @@ function App() {
               {/* <Route path="/editprofile/:id" element={<Pro />} /> */}
               <Route path="editprofile/:id" element={<Stepmain/>}/>
               <Route path="/addimage" element={<AddEventImage/>}/>
+              <Route path="/addimage" element={<Addimage/>}/>
             </Routes>
           </div>
         </div>

@@ -89,12 +89,12 @@ const AddEventImage = () => {
     () => [
       { accessorKey: "title", header: "Title" },
       {
-        accessorKey: "date",
+        accessorKey: "createdAt",
         header: "Date",
         Cell: ({ cell }) => new Date(cell.getValue()).toLocaleDateString(),
       },
       {
-        accessorKey: "imageUrl",
+        accessorKey: "imageevent",
         header: "Image",
         Cell: ({ cell }) =>
           cell.getValue() ? (
@@ -140,7 +140,6 @@ const AddEventImage = () => {
     ],
     [events, menuAnchorEl, menuEvent]
   );
-
   const theme = useMemo(
     () =>
       createTheme({
@@ -159,7 +158,7 @@ const AddEventImage = () => {
       <div className={styles.header}>
         <h2 className={styles.title}>Events</h2>
         <button className={styles.add}>
-          <Link to="/addevent">Add Event</Link>
+          <Link to="/addimage">Add Event</Link>
         </button>
         <button className={styles.addimagebutton}>
           <Link to="/addimage">Images</Link>
