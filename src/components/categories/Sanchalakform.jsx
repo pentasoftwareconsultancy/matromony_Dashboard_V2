@@ -279,15 +279,28 @@ const Sanchalakform = () => {
             onChange={(e) => handleWorkChange(index, e)}
             placeholder="Feedback"
           />
-          <button type="button" onClick={() => removeWork(index)}>
+          <button
+            type="button"
+            className={styles.removeWorkBtn}
+            onClick={() => removeWork(index)}
+          >
             Remove Work
           </button>
+
         </div>
       ))}
-      <button type="button" onClick={addWork}>
+      <button
+        type="button"
+        className={styles.addWorkBtn}
+        onClick={addWork}
+      >
         Add Work
       </button>
-      <button type="submit" disabled={loading}>
+      <button
+        type="submit"
+        className={styles.submitBtn}
+        disabled={loading}
+      >
         {loading ? "Submitting..." : isEditing ? "Save Changes" : "Create Sanchalak"}
       </button>
     </form>

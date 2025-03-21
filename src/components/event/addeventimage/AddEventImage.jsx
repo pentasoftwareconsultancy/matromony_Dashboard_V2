@@ -2,34 +2,35 @@ import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import { MaterialReactTable } from "material-react-table";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Menu, MenuItem, IconButton } from "@mui/material";
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Menu,
+  MenuItem,
+  IconButton,
+} from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate to navigate programmatically
-import styles from "./Eventmain.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./AddEventImage.module.css";
 
-const Data = {
-  themeOptions: {
-    light: "light",
-    dark: "dark",
-    custom: "custom",
-  },
-};
-const Eventmain = () => {
+const AddEventImage = () => {
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [themeMode, setThemeMode] = useState(Data.themeOptions.light);
+  const [themeMode, setThemeMode] = useState("light");
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [dialogType, setDialogType] = useState(""); // "view", "edit", "delete"
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const [menuEvent, setMenuEvent] = useState(null);
   const navigate = useNavigate();
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/v1/events");
+      const response = await axios.get("http://localhost:8000/api/v1/eventimage");
       setEvents(response.data.data);
       setLoading(false);
     } catch (err) {
@@ -42,24 +43,10 @@ const Eventmain = () => {
     fetchEvents();
   }, []);
 
-  const handleModeChange = (e) => {
-    const selectedMode = e.target.value;
-    if (
-      selectedMode === Data.themeOptions.light ||
-      selectedMode === Data.themeOptions.dark
-    ) {
-      setThemeMode(selectedMode);
-      document.body.setAttribute("data-bg", "");
-    } else {
-      setThemeMode(Data.themeOptions.light); // Default to light
-      document.body.setAttribute("data-bg", selectedMode); // Set custom background
-    }
-  };
-
   const handleDialogOpen = (type, event) => {
     if (type === "edit") {
       navigate(`/addevent/${event._id}`);
-    } else if (type === "/viewevent") {
+    } else if (type === "viewevent") {
       navigate(`/viewevent/${event._id}`);
     } else {
       setDialogType(type);
@@ -77,8 +64,10 @@ const Eventmain = () => {
 
   const handleDeleteConfirm = async () => {
     try {
-      await axios.delete(`http://localhost:8000/api/v1/events/${selectedEvent._id}`);
-      setEvents(events.filter((e) => e._id !== selectedEvent._id)); // Update UI
+      await axios.delete(
+        `http://localhost:8000/api/v1/eventimage/${selectedEvent._id}`
+      );
+      setEvents(events.filter((e) => e._id !== selectedEvent._id));
       handleDialogClose();
     } catch (err) {
       alert("Failed to delete event. Please try again.");
@@ -95,17 +84,15 @@ const Eventmain = () => {
     setMenuEvent(null);
   };
 
+  // ✅ Updated Columns: Only Title, Date, and Image
   const columns = useMemo(
     () => [
-      { accessorKey: "name", header: "Event Name" },
-      { accessorKey: "description", header: "Description" },
+      { accessorKey: "title", header: "Title" },
       {
         accessorKey: "date",
         header: "Date",
         Cell: ({ cell }) => new Date(cell.getValue()).toLocaleDateString(),
       },
-      { accessorKey: "location", header: "Location" },
-      { accessorKey: "organizer", header: "Organizer" },
       {
         accessorKey: "imageUrl",
         header: "Image",
@@ -137,7 +124,7 @@ const Eventmain = () => {
               onClose={handleMenuClose}
               className={styles.menu}
             >
-              <MenuItem onClick={() => handleDialogOpen("/viewevent", row.original)}>
+              <MenuItem onClick={() => handleDialogOpen("viewevent", row.original)}>
                 View
               </MenuItem>
               <MenuItem onClick={() => handleDialogOpen("edit", row.original)}>
@@ -206,5 +193,4 @@ const Eventmain = () => {
   );
 };
 
-export default Eventmain;
-
+export default AddEventImage;

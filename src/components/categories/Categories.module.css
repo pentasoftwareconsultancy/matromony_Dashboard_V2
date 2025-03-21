@@ -8,8 +8,24 @@
 .title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: rgb(20, 19, 19);
+  color:black;
 }
+
+.buttonadd{
+  background-color: #ff5069;
+  margin-left: 90%;
+  margin-bottom: 20px;
+}
+
+.buttonadd a {
+  color: white;
+  text-decoration: none;
+}
+
+.buttonadd:hover {
+  background-color: #f02f4c;
+}
+
 
 .loader {
   text-align: center;

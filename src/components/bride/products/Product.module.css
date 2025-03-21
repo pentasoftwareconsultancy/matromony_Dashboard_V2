@@ -1,3 +1,10 @@
+:root {
+  --bg-color: #34495e;
+  --text-color: #ecf0f1;
+  --hover-color: #f39c12;
+  --active-color: #e67e22;
+}
+
 /* =========================
    Container for the entire table
 ========================= */
@@ -6,12 +13,12 @@
   flex-direction: column;
   border-radius: 15px;
   flex: 1;
-  margin: -10px;
+  margin: 10px auto;
   padding: 20px;
-  width: 98%;
-  margin-right: -70px;
+  width: 95%;
+  max-width: 1200px;
   overflow-y: auto;
-  background-color: var(--bg-color); /* Dynamic background color */
+  background-color: var(--bg-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
 
@@ -21,7 +28,6 @@
 .titlebride {
   font-size: 24px;
   font-weight: bold;
-  margin-left: 500px;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -50,7 +56,6 @@
 ========================= */
 .add {
   display: inline-block;
-  margin-bottom: 15px;
   background-color: #ff5069;
   color: white;
   padding: 10px 20px;
@@ -59,7 +64,7 @@
   cursor: pointer;
   text-align: center;
   font-size: 16px;
-  margin-left: 450px;
+  margin: 0 auto 15px auto;
 }
 
 .add a {
@@ -77,6 +82,8 @@
 .main {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 /* =========================
@@ -229,4 +236,105 @@
 .dropdownItem:hover {
   background-color: #444;
   color: #1e88e5;
+}
+
+/* =========================
+   Responsive Styles
+========================= */
+
+/* Tablets and Medium Screens */
+@media (max-width: 1024px) {
+  .table_container {
+    width: 95%;
+    padding: 15px;
+  }
+
+  .titlebride {
+    font-size: 22px;
+    margin-left: 0;
+  }
+
+  .add {
+    margin-left: 0;
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Smaller Tablets and Large Phones */
+@media (max-width: 768px) {
+  .table_container {
+    width: 100%;
+    margin: 0;
+    padding: 10px;
+  }
+
+  .titlebride {
+    font-size: 20px;
+    margin-bottom: 15px;
+  }
+
+  .add {
+    width: 100%;
+    text-align: center;
+    max-width: 250px;
+  }
+
+  .imagemain {
+    width: 40px;
+    height: 40px;
+  }
+
+  .threeDotsButton {
+    font-size: 16px;
+  }
+
+  .popup {
+    width: 100px;
+    padding: 8px;
+  }
+
+  .popupOption {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+/* Mobile Devices */
+@media (max-width: 480px) {
+  .table_container {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .titlebride {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .add {
+    width: 100%;
+    max-width: 200px;
+    padding: 8px 15px;
+    font-size: 14px;
+  }
+
+  .imagemain {
+    width: 30px;
+    height: 30px;
+  }
+
+  .threeDotsButton {
+    font-size: 14px;
+  }
+
+  .popup {
+    width: 90px;
+    padding: 5px;
+  }
+
+  .popupOption {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
 }

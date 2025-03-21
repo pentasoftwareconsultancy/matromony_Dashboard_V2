@@ -7,6 +7,7 @@
   --border-radius: 20px;
 }
 
+/* Sidebar */
 .Sidebar {
   height: 100vh;
   background-color: var(--bg-color);
@@ -29,11 +30,11 @@
   width: 60px;
 }
 
-/* Toggle Button - Positioned at the top */
+/* Toggle Button */
 .ToggleButton {
-  position: absolute; /* Fixed inside sidebar */
+  position: absolute;
   top: 15px;
-  left: 15px; /* Default position when collapsed */
+  left: 15px;
   font-size: 20px;
   background-color: var(--toggle-bg, #f1f1f1);
   color: var(--text-color, #333);
@@ -49,26 +50,25 @@
   transition: all 0.3s ease-in-out;
 }
 
-/* Toggle Button when Expanded - Shifted to the Left */
+/* Expanded Toggle */
 .Expanded .ToggleButton {
-  left: 210px; /* Positioned inside the expanded sidebar */
+  left: 210px;
   transform: rotate(0deg);
 }
 
-/* Toggle Button when Collapsed - Centered */
+/* Collapsed Toggle */
 .Collapsed .ToggleButton {
-  left: 20px; /* Centered when collapsed */
+  left: 20px;
   transform: rotate(180deg);
   top: 10px;
 }
 
-
-/* Hover Effect for Toggle Button */
+/* Hover Effect */
 .ToggleButton:hover {
   background-color: var(--hover-color);
 }
 
-/* Brand Section */
+/* Brand */
 .Brand {
   display: flex;
   justify-content: center;
@@ -79,22 +79,20 @@
 }
 
 .Brand img {
-  width: 70%; /* Default width when expanded */
+  width: 70%;
   height: auto;
   border-radius: 50%;
   transition: width 0.3s ease;
 }
 
-/* Logo when Sidebar is Collapsed */
+/* Collapsed Brand */
 .Collapsed .Brand img {
-  width: 50px; /* Smaller size when collapsed */
-  height: 900px;
-  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   margin-top: 30px;
 }
 
-
-/* Nav Section */
+/* Nav */
 .Nav {
   flex: 1;
   display: flex;
@@ -102,11 +100,11 @@
   gap: 10px;
 }
 
+/* Links */
 .Link {
   display: flex;
   align-items: center;
   gap: 15px;
-  
   color: var(--text-color);
   text-decoration: none;
   font-size: 16px;
@@ -126,7 +124,7 @@
   transition: opacity 0.3s ease;
 }
 
-/* Hover and Active States */
+/* Hover and Active */
 .Link:hover {
   background-color: var(--hover-color);
   color: #fff;
@@ -136,7 +134,7 @@
   background-color: var(--active-color);
 }
 
-/* Dropdown Styles */
+/* Dropdown */
 .Dropdown {
   display: flex;
   justify-content: space-between;
@@ -175,61 +173,89 @@
   right: -25px;
 }
 
-/* Mobile Styles */
-@media (max-width: 768px) {
-  .Sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
-    z-index: 999;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-
-  .Sidebar.Show {
-    transform: translateX(0);
-  }
-
-  .Collapsed {
-    width: 100%;
-  }
-
-  .ToggleButton {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1001;
-  }
-
-  .Link {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .Logout {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-
-/* Tablet Styles */
+/* Responsive Styles */
 @media (max-width: 1024px) {
   .Sidebar {
-    width: 75%;
+    width: 200px;
+  }
+
+  .Expanded .ToggleButton {
+    left: 160px;
   }
 
   .Collapsed {
     width: 60px;
   }
 
+  .Collapsed .ToggleButton {
+    left: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .Sidebar {
+    width: 180px;
+  }
+
+  .Expanded .ToggleButton {
+    left: 140px;
+  }
+
+  .Collapsed {
+    width: 55px;
+  }
+
+  .Collapsed .ToggleButton {
+    left: 12px;
+  }
+
   .Link {
     font-size: 14px;
+    padding: 10px 12px;
+  }
+
+  .Icon {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .Sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 5px;
+  }
+
+  .Collapsed {
+    width: 100%;
+    flex-direction: row;
+  }
+
+  .Link {
+    padding: 8px;
+    font-size: 12px;
   }
 
   .ToggleButton {
-    top: 15px;
+    top: 5px;
     left: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .Collapsed .ToggleButton {
+    left: 10px;
+  }
+
+  .Collapsed .Brand img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .Brand {
+    margin-bottom: 0;
   }
 }

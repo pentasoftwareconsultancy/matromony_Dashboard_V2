@@ -2,9 +2,9 @@ import React, { useState, useMemo, useEffect } from "react";
 import { MaterialReactTable } from "material-react-table";
 import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
-import styles from "./Groommain.module.css";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
+import style from "./Groommain.module.css";
+import { Link, useNavigate } from "react-router-dom";
 
 const Groommain = () => {
   const [data, setData] = useState([]);
@@ -14,11 +14,13 @@ const Groommain = () => {
   const [popupPosition, setPopupPosition] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
 
+  const navigate = useNavigate(); // Navigation hook
+
   const theme = useMemo(
     () =>
       createTheme({
         palette: {
-          // Customize theme if needed
+          // mode: "dark",
         },
       }),
     []
@@ -33,7 +35,7 @@ const Groommain = () => {
       setData(response.data.data);
       setIsLoading(false);
     } catch (err) {
-      setError("Failed to fetch data.");
+      setError("Failed to fetch grooms.");
       setIsLoading(false);
     }
   };
@@ -57,16 +59,53 @@ const Groommain = () => {
     setSelectedRow(null);
   };
 
+  const handleView = () => {
+    if (selectedRow) {
+      navigate(`/profile/${selectedRow._id}`);
+      closePopup();
+    }
+  };
+
+  const handleEdit = () => {
+    if (selectedRow) {
+      navigate(`/editprofile/${selectedRow._id}`);
+      closePopup();
+    }
+  };
+
+  const handleDelete = async () => {
+    if (selectedRow) {
+      try {
+        await axios.delete(
+          `http://localhost:8000/api/v1/bride-groom/${selectedRow._id}`
+        );
+        fetchData(); // Refresh data after delete
+        closePopup();
+      } catch (err) {
+        console.error("Error deleting profile:", err);
+      }
+    }
+  };
+
   const columns = useMemo(
     () => [
-      { accessorKey: "fullName", header: "Name" },
-      { accessorKey: "mobileNumber", header: "Mobile Number" },
+      {
+        accessorKey: "fullName",
+        header: "Name",
+      },
+      {
+        accessorKey: "mobileNumber",
+        header: "Mobile Number",
+      },
       {
         accessorKey: "dateOfBirth",
         header: "Date of Birth",
         Cell: ({ cell }) => new Date(cell.getValue()).toLocaleDateString(),
       },
-      { accessorKey: "city", header: "Location" },
+      {
+        accessorKey: "city",
+        header: "Location",
+      },
       {
         accessorKey: "annualIncome",
         header: "Annual Income",
@@ -79,8 +118,8 @@ const Groommain = () => {
           cell.getValue() ? (
             <img
               src={cell.getValue()}
-              alt="Profile"
-              className={styles.imagemain}
+              alt="Groom"
+              className={style.imagemain}
             />
           ) : (
             "No Image"
@@ -91,10 +130,10 @@ const Groommain = () => {
         header: "Actions",
         Cell: ({ row }) => (
           <div
-            className={styles.actionsContainer}
+            className={style.actionsContainer}
             onClick={(event) => handleThreeDotsClick(event, row)}
           >
-            <button className={styles.threeDotsButton}>...</button>
+            <button className={style.threeDotsButton}>...</button>
           </div>
         ),
       },
@@ -103,42 +142,52 @@ const Groommain = () => {
   );
 
   return (
-    <div className={styles.table_container}>
+    <div className={style.table_container}>
       <ThemeProvider theme={theme}>
-        <div className={styles.groommain}>
-          <Link to="/addprofile">Add Groom</Link>
+        <div className={style.main}>
+          <h2 className={style.titlebride}>Groom</h2>
+          <h2 className={style.add}>
+            <Link to="/addprofile">Add Groom</Link>
+          </h2>
         </div>
-        <h2 className={styles.title}>Grooms</h2>
         {isLoading ? (
-          <div className={styles.loader}>
+          <div className={style.loader}>
             <CircularProgress />
           </div>
         ) : error ? (
-          <div className={styles.error}>
+          <div className={style.error}>
             <p>{error}</p>
           </div>
         ) : (
-          <MaterialReactTable
-            columns={columns}
-            data={data}
-            className={styles.tablemain}
-          />
+          <div className={style.table_wrapper}>
+            <MaterialReactTable
+              columns={columns}
+              data={data}
+              className={style.tablemain}
+            />
+          </div>
         )}
         {popupVisible && popupPosition && (
           <div
-            className={styles.popup}
+            className={style.popup}
             style={{
               top: popupPosition.top,
               left: popupPosition.left,
             }}
           >
-            <div className={styles.popupOption}>View</div>
-            <div className={styles.popupOption}>Edit</div>
-            <div className={styles.popupOption}>Delete</div>
+            <div className={style.popupOption} onClick={handleView}>
+              View
+            </div>
+            <div className={style.popupOption} onClick={handleEdit}>
+              Edit
+            </div>
+            <div className={style.popupOption} onClick={handleDelete}>
+              Delete
+            </div>
           </div>
         )}
         {popupVisible && (
-          <div className={styles.overlay} onClick={closePopup}></div>
+          <div className={style.overlay} onClick={closePopup}></div>
         )}
       </ThemeProvider>
     </div>

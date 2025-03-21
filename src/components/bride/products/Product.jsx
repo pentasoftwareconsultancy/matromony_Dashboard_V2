@@ -4,15 +4,17 @@ import axios from "axios";
 import CircularProgress from "@mui/material/CircularProgress";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import style from "./Product.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Product = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [popupVisible, setPopupVisible] = useState(false); // To show/hide popup
-  const [popupPosition, setPopupPosition] = useState(null); // To position the popup
-  const [selectedRow, setSelectedRow] = useState(null); // To track the clicked row
+  const [popupVisible, setPopupVisible] = useState(false);
+  const [popupPosition, setPopupPosition] = useState(null);
+  const [selectedRow, setSelectedRow] = useState(null);
+
+  const navigate = useNavigate(); // Navigation hook
 
   const theme = useMemo(
     () =>
@@ -45,16 +47,44 @@ const Product = () => {
   const handleThreeDotsClick = (event, row) => {
     const rect = event.target.getBoundingClientRect();
     setPopupPosition({
-      top: rect.bottom + window.scrollY + 10, // Position 10px below the button
-      left: rect.left + window.scrollX, // Align horizontally with the button
+      top: rect.bottom + window.scrollY + 10,
+      left: rect.left + window.scrollX,
     });
-    setPopupVisible(!popupVisible); // Toggle the popup
-    setSelectedRow(row.original); // Set the selected row
+    setPopupVisible(!popupVisible);
+    setSelectedRow(row.original);
   };
 
   const closePopup = () => {
     setPopupVisible(false);
     setSelectedRow(null);
+  };
+
+  const handleView = () => {
+    if (selectedRow) {
+      navigate(`/profile/${selectedRow._id}`);
+      closePopup();
+    }
+  };
+
+  const handleEdit = () => {
+    if (selectedRow) {
+      navigate(`/editprofile/${selectedRow._id}`);
+      closePopup();
+    }
+  };
+
+  const handleDelete = async () => {
+    if (selectedRow) {
+      try {
+        await axios.delete(
+          `http://localhost:8000/api/v1/bride-groom/${selectedRow._id}`
+        );
+        fetchData(); // Refresh data after delete
+        closePopup();
+      } catch (err) {
+        console.error("Error deleting profile:", err);
+      }
+    }
   };
 
   const columns = useMemo(
@@ -115,9 +145,10 @@ const Product = () => {
     <div className={style.table_container}>
       <ThemeProvider theme={theme}>
         <div className={style.main}>
-        <h2 className={style.titlebride}>Brides</h2>
-        {/* <h2 className={style.add}><Link to="/addprofile">Add Bride</Link></h2> */}
-        <h2 className={style.add}><Link to="/addprofile">Add Bride</Link></h2>
+          <h2 className={style.titlebride}>Brides</h2>
+          <h2 className={style.add}>
+            <Link to="/addprofile">Add Bride</Link>
+          </h2>
         </div>
         {isLoading ? (
           <div className={style.loader}>
@@ -128,7 +159,11 @@ const Product = () => {
             <p>{error}</p>
           </div>
         ) : (
-          <MaterialReactTable columns={columns} data={data} className={style.tablemain} />
+          <MaterialReactTable
+            columns={columns}
+            data={data}
+            className={style.tablemain}
+          />
         )}
         {popupVisible && popupPosition && (
           <div
@@ -138,9 +173,15 @@ const Product = () => {
               left: popupPosition.left,
             }}
           >
-            <div className={style.popupOption}>View</div>
-            <div className={style.popupOption}>Edit</div>
-            <div className={style.popupOption}>Delete</div>
+            <div className={style.popupOption} onClick={handleView}>
+              View
+            </div>
+            <div className={style.popupOption} onClick={handleEdit}>
+              Edit
+            </div>
+            <div className={style.popupOption} onClick={handleDelete}>
+              Delete
+            </div>
           </div>
         )}
         {popupVisible && (

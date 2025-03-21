@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import styles from "./Addevent.module.css";
+import styles from "./Addevent.module.css";    
 
 const Addevent = () => {
   const { id } = useParams();
