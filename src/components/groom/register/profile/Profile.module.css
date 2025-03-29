@@ -1,27 +1,28 @@
-/* Profile.module.css */
-
 /* Container for the form */
 .container {
-  display: flex;
+  /* display: flex; */
   justify-content: center;
+  /* margin-top: -20px; */
   align-items: center;
   min-height: 100vh;
-  /* background-color: #f5f5f5; */
   padding: 20px;
 }
-.fullName{
-  width: 500px;
-}
+
 /* Style for the form */
 .form {
-  background-color: #fff;
+  /* background-color: #fff; */
   border-radius: 8px;
- 
-  height: 100vh;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  padding: 30px;
-  width: 90%;
-  /* max-width: 800px; */
+  padding: 20px;
+  width: 100%;
+  padding-left: 50px;
+  background-color: white;
+  max-width: 1100px; /* Added max-width for larger screens */
+}
+
+/* Full name width */
+.fullName {
+  width: 500px;
 }
 
 /* Title of the form */
@@ -29,16 +30,16 @@
   font-size: 2rem;
   font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
-  padding-top: 50px;
+  margin-bottom: 30px;
+  padding-top: 5px;
   text-align: center;
 }
 
 /* Subtitle under the title */
 .subtitle {
-
-  font-size: 1.1rem;
+  font-size: 1.4rem;
   color: #555;
+  font-weight: 600;
   margin-bottom: 20px;
   padding-bottom: 30px;
   text-align: center;
@@ -76,7 +77,8 @@ input[type="password"],
 input[type="date"],
 select {
   padding: 10px;
-  width: 450px;
+  width: 100%; /* Changed to 100% for flexibility */
+  max-width: 450px; /* Added max-width to limit on larger screens */
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -114,32 +116,65 @@ select:focus {
   background-color: #3e8e41;
 }
 
-
 /* Responsive Design */
+
+/* Tablets and smaller laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 15px;
+  }
+
+  .form {
+    padding: 25px;
+    width: 100%;
+  }
+
+  .fullName {
+    width: 100%;
+    max-width: 450px;
+  }
+
+  .title {
+    font-size: 1.9rem;
+    padding-top: 30px;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+  }
+
+  .row {
+    gap: 15px;
+  }
+}
+
+/* Larger mobile devices and small tablets (max-width: 768px) */
 @media (max-width: 768px) {
   .container {
-    /* padding: 10px; */
-    background-color: white;
-    height: auto;
-padding: 0%;
-/* margin-top: -30px; */
-    width: 100%;
+    padding: 0;
+    min-height: auto; /* Adjusted for mobile */
+    align-items: flex-start; /* Align form to top */
   }
 
   .form {
     padding: 20px;
-    background-color: white;
     width: 100%;
-    height: auto;
+    border-radius: 0; /* Remove border-radius for full-width mobile */
+    box-shadow: none; /* Optional: remove shadow on small screens */
+  }
+
+  .fullName {
+    width: 100%;
   }
 
   .title {
-    margin-top: -40px;
     font-size: 1.8rem;
+    padding-top: 20px;
   }
 
   .subtitle {
     font-size: 1rem;
+    padding-bottom: 20px;
   }
 
   .row {
@@ -147,13 +182,14 @@ padding: 0%;
     gap: 15px;
   }
 
-  .inputGroup input {
-    width: 100%;
+  .inputGroup {
+    min-width: 100%; /* Full width on smaller screens */
   }
 
   input,
   select {
-    width: 98%;
+    width: 100%;
+    max-width: none; /* Remove max-width restriction */
     font-size: 1rem;
   }
 
@@ -163,30 +199,57 @@ padding: 0%;
   }
 }
 
+/* Medium to small mobile devices (max-width: 480px) */
 @media (max-width: 480px) {
-   .container{
-height: auto;
-  }
-
   .form {
-    padding: 15px;
-    height: auto;
+    padding: 5px;
   }
 
   .title {
     font-size: 1.6rem;
+    padding-top: 15px;
   }
 
   .subtitle {
     font-size: 0.9rem;
+    padding-bottom: 15px;
   }
 
   input,
   select {
     font-size: 0.9rem;
+    width: 100%;
+    padding: 8px;
   }
 
   .submitButton {
     font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+/* Extra small mobile devices (max-width: 360px) */
+@media (max-width: 360px) {
+  .form {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 1.4rem;
+  }
+
+  .subtitle {
+    font-size: 0.85rem;
+  }
+
+  input,
+  select {
+    font-size: 0.85rem;
+    padding: 7px;
+  }
+
+  .submitButton {
+    font-size: 0.85rem;
+    padding: 8px;
   }
 }

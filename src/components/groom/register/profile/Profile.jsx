@@ -116,8 +116,9 @@ useEffect(() => {
 
   return (
     <div className={styles.container}>
+       <h2 className={styles.title}>Bride/Groom Registration</h2>
       <form className={styles.form}>
-        <h2 className={styles.title}>Bride/Groom Registration</h2>
+       
         <p className={styles.subtitle}>Complete your profile to start your journey!</p>
 
         <div className={styles.row}>

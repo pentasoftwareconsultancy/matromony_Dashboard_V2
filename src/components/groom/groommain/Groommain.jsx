@@ -14,7 +14,7 @@ const Groommain = () => {
   const [popupPosition, setPopupPosition] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
 
-  const navigate = useNavigate(); // Navigation hook
+  const navigate = useNavigate();
 
   const theme = useMemo(
     () =>
@@ -68,7 +68,8 @@ const Groommain = () => {
 
   const handleEdit = () => {
     if (selectedRow) {
-      navigate(`/editprofile/${selectedRow._id}`);
+      // Pass the selected row data to Stepmain via navigation state
+      navigate(`/editprofile/${selectedRow._id}`, { state: { profileData: selectedRow } });
       closePopup();
     }
   };
@@ -89,23 +90,14 @@ const Groommain = () => {
 
   const columns = useMemo(
     () => [
-      {
-        accessorKey: "fullName",
-        header: "Name",
-      },
-      {
-        accessorKey: "mobileNumber",
-        header: "Mobile Number",
-      },
+      { accessorKey: "fullName", header: "Name" },
+      { accessorKey: "mobileNumber", header: "Mobile Number" },
       {
         accessorKey: "dateOfBirth",
         header: "Date of Birth",
         Cell: ({ cell }) => new Date(cell.getValue()).toLocaleDateString(),
       },
-      {
-        accessorKey: "city",
-        header: "Location",
-      },
+      { accessorKey: "city", header: "Location" },
       {
         accessorKey: "annualIncome",
         header: "Annual Income",
@@ -116,11 +108,7 @@ const Groommain = () => {
         header: "Image",
         Cell: ({ cell }) =>
           cell.getValue() ? (
-            <img
-              src={cell.getValue()}
-              alt="Groom"
-              className={style.imagemain}
-            />
+            <img src={cell.getValue()} alt="Groom" className={style.imagemain} />
           ) : (
             "No Image"
           ),
@@ -160,20 +148,13 @@ const Groommain = () => {
           </div>
         ) : (
           <div className={style.table_wrapper}>
-            <MaterialReactTable
-              columns={columns}
-              data={data}
-              className={style.tablemain}
-            />
+            <MaterialReactTable columns={columns} data={data} className={style.tablemain} />
           </div>
         )}
         {popupVisible && popupPosition && (
           <div
             className={style.popup}
-            style={{
-              top: popupPosition.top,
-              left: popupPosition.left,
-            }}
+            style={{ top: popupPosition.top, left: popupPosition.left }}
           >
             <div className={style.popupOption} onClick={handleView}>
               View
@@ -186,9 +167,7 @@ const Groommain = () => {
             </div>
           </div>
         )}
-        {popupVisible && (
-          <div className={style.overlay} onClick={closePopup}></div>
-        )}
+        {popupVisible && <div className={style.overlay} onClick={closePopup}></div>}
       </ThemeProvider>
     </div>
   );

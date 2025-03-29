@@ -158,10 +158,10 @@ const AddEventImage = () => {
       <div className={styles.header}>
         <h2 className={styles.title}>Events</h2>
         <button className={styles.add}>
-          <Link to="/addimage">Add Event</Link>
+          <Link to="/addevent">Add Event</Link>
         </button>
         <button className={styles.addimagebutton}>
-          <Link to="/addimage">Images</Link>
+          <Link to="/addimagemain">Images</Link>
         </button>
       </div>
 

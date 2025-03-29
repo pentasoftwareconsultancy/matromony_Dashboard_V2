@@ -1,34 +1,46 @@
 .formContainer {
-  max-width: 1000px;
+
+}
+.form{
+  max-width: 100%;
   margin: 0 auto;
   padding: 20px;
-  background: #fff;
+  
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  
 }
-.formGroupmain{
+.formGroupmain {
   display: flex;
   flex-direction: column;
   margin-top: 30px;
 }
+
 .title {
   text-align: center;
   font-size: 24px;
   font-weight: bold;
   margin-bottom: 20px;
 }
-.mainsection{
-  display: grid;
-  grid-template-columns: 1fr  1fr;
-  gap: 20px;
-}
-.personal{
+
+.mainsection {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px; 
+  gap: 20px;
 }
+
+.personal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
 .section {
   margin-bottom: 20px;
+  padding: 40px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius:20px;
+  padding-left: 70px;
+  background-color: #ffffff;
 }
 
 .detail {
@@ -59,6 +71,7 @@ label {
   border-radius: 5px;
   font-size: 14px;
   outline: none;
+  width: 100%; /* Ensure inputs scale with container */
 }
 
 .input:focus {
@@ -70,14 +83,150 @@ textarea.input {
   min-height: 80px;
 }
 
-@media (max-width: 768px) {
+/* Responsive Design */
+
+/* Tablets and small laptops (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .formContainer {
+    max-width: 90%; /* Slightly reduce max-width for tablets */
+    padding: 15px;
+  }
+
+  .mainsection,
+  .personal {
+    grid-template-columns: 1fr 1fr; /* Maintain 2 columns */
+    gap: 15px;
+  }
+
   .gridContainer {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr); /* Keep 3 columns */
+    gap: 15px;
   }
 }
 
-@media (max-width: 480px) {
+/* Larger mobile devices and small tablets (max-width: 768px) */
+@media (max-width: 768px) {
+  .formContainer {
+    max-width: 100%; /* Full width on smaller screens */
+    padding: 15px;
+    border-radius: 0; /* Optional: remove radius for edge-to-edge look */
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .mainsection,
+  .personal {
+    grid-template-columns: 1fr; /* Switch to single column */
+    gap: 15px;
+  }
+
   .gridContainer {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: 12px;
+  }
+
+  .detail {
+    font-size: 16px;
+  }
+
+  .input {
+    font-size: 13px;
+    padding: 8px;
+  }
+
+  textarea.input {
+    min-height: 60px; /* Slightly smaller textarea */
+  }
+}
+
+/* Medium to small mobile devices (max-width: 480px) */
+@media (max-width: 480px) {
+  .formContainer {
+    padding: 10px;
+  }
+
+  .title {
+    font-size: 18px;
+    margin-bottom: 15px;
+  }
+
+  .formGroupmain {
+    margin-top: 20px;
+  }
+
+  .mainsection,
+  .personal {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .gridContainer {
+    grid-template-columns: 1fr; /* Single column */
+    gap: 10px;
+  }
+
+  .section {
+    margin-bottom: 15px;
+  }
+
+  .detail {
+    font-size: 15px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  .input {
+    font-size: 12px;
+    padding: 7px;
+  }
+}
+
+/* Extra small mobile devices (max-width: 360px) */
+@media (max-width: 360px) {
+  .formContainer {
+    padding: 8px;
+  }
+
+  .title {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .formGroupmain {
+    margin-top: 15px;
+  }
+
+  .mainsection,
+  .personal {
+    gap: 8px;
+  }
+
+  .gridContainer {
+    gap: 8px;
+  }
+
+  .section {
+    margin-bottom: 12px;
+  }
+
+  .detail {
+    font-size: 14px;
+  }
+
+  label {
+    font-size: 13px;
+  }
+
+  .input {
+    font-size: 11px;
+    padding: 6px;
+  }
+
+  textarea.input {
+    min-height: 50px;
   }
 }

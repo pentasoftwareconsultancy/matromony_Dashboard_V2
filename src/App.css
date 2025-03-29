@@ -14,7 +14,7 @@ body {
   transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
   background-color: var(--bg-color);
   color: var(--text-color);
-  overflow: hidden; /* Prevent body scrolling */
+  overflow-x: hidden; /* Changed from overflow: hidden to allow vertical scrolling */
 }
 
 /* Light Mode */
@@ -29,36 +29,45 @@ body[data-theme='dark'] {
   --text-color: #ffffff;
 }
 
-/* Background Images for Themes with Opacity */
+/* Background Images for Themes */
 body[data-bg='nature'] {
   background-image: url('./assets/images/nature.jpg');
-  opacity: 0.6; /* Apply opacity to background */
 }
 
 body[data-bg='abstract'] {
   background-image: url('./assets/images/abstract.jpg');
-  opacity: 0.6; /* Apply opacity to background */
 }
 
 body[data-bg='space'] {
   background-image: url('./assets/images/space.jpg');
-  opacity: 0.6; /* Apply opacity to background */
 }
 
 body[data-bg] {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  transition: background-image var(--transition-speed) ease-in-out, opacity var(--transition-speed) ease-in-out;
+  transition: background-image var(--transition-speed) ease-in-out;
+  position: relative;
+}
+
+body[data-bg]::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Better opacity control */
+  z-index: 0;
 }
 
 /* Global Layout */
 .Container {
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
-  overflow: hidden;
-  transition: all var(--transition-speed) ease-in-out;
+  position: relative;
+  z-index: 1;
 }
 
 /* Hide scrollbar */
@@ -68,14 +77,10 @@ body[data-bg] {
 
 /* Sidebar Styles */
 .Sidebar {
-  flex: 0 0 20%;
   background-color: var(--bg-color);
   color: var(--text-color);
   transition: transform var(--transition-speed) ease-in-out;
-}
-
-.SidebarHidden .Sidebar {
-  transform: translateX(-100%);
+  width: 20%;
 }
 
 /* Main Content */
@@ -87,8 +92,7 @@ body[data-bg] {
 }
 
 .Navbar {
-  flex-shrink: 0;
-  padding: 10px;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,73 +102,101 @@ body[data-bg] {
 
 .Page {
   flex: 1;
-  padding: 20px;
+  padding: 1.25rem;
   overflow-y: auto;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
-  /* Tablets and small laptops */
+/* Mobile Responsive Design - Using Mobile-First Approach */
+@media (min-width: 480px) {
   .Sidebar {
-    flex: 0 0 40%; /* Sidebar takes more space on smaller screens */
+    width: 25%;
   }
 }
 
-@media (max-width: 768px) {
-  /* Small devices like tablets */
+@media (min-width: 768px) {
   .Sidebar {
-    flex: 0 0 60%; /* Sidebar takes 60% of the screen */
+    width: 20%;
   }
-
-  .MainContainer {
-    flex-direction: column; /* Stack main content vertically */
-  }
-
+  
   .Navbar {
-    flex-direction: column; /* Stack Navbar items vertically */
-    padding: 15px;
+    padding: 1.25rem;
   }
-
+  
   .Page {
-    padding: 15px;
+    padding: 1.5rem;
   }
 }
 
-@media (max-width: 480px) {
-  /* Mobile devices */
+@media (min-width: 1024px) {
   .Sidebar {
-    flex: 0 0 100%; /* Sidebar takes the full screen */
-    position: absolute;
-    height: 100%;
-    z-index: 2;
-    transform: translateX(-100%); /* Sidebar hidden by default */
+    width: 20%;
+  }
+}
+
+/* Mobile-first base styles (below 480px) */
+@media (max-width: 479px) {
+  .Container {
+    flex-direction: column;
+  }
+
+  .Sidebar {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%);
+    z-index: 1000;
   }
 
   .SidebarVisible .Sidebar {
-    transform: translateX(0); /* Show sidebar */
-  }
-
-  .Page {
-    padding: 10px;
+    transform: translateX(0);
   }
 
   .Navbar {
-    flex-direction: column; /* Stack Navbar items vertically */
-    padding: 20px;
+    flex-direction: column;
+    padding: 0.75rem;
+    text-align: center;
   }
 
-  .Navbar h2 {
-    font-size: 1.2rem; /* Make the heading smaller */
+  .Page {
+    padding: 0.75rem;
   }
 }
 
-@media (max-width: 320px) {
-  /* Extra small devices like some mobile phones */
+/* Tablet and small screens (480px - 767px) */
+@media (min-width: 480px) and (max-width: 767px) {
+  .Container {
+    flex-direction: column;
+  }
+
+  .Sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    transform: none;
+  }
+
+  .SidebarHidden .Sidebar {
+    transform: translateX(-100%);
+  }
+
   .Navbar {
-    padding: 10px;
+    padding: 1rem;
   }
 
   .Page {
-    padding: 10px;
+    padding: 1rem;
+  }
+}
+
+/* Medium screens (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .Sidebar {
+    width: 30%;
+  }
+
+  .SidebarHidden .Sidebar {
+    transform: translateX(-100%);
   }
 }

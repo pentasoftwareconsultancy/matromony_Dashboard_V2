@@ -1,89 +1,121 @@
+/* Container for the table */
 .tableContainer {
-  padding: 20px;
-  width: 99%;
+  padding: clamp(10px, 2vw, 20px); /* Responsive padding */
+  width: 100%; /* Full width for responsiveness */
   background-color: var(--bg-color);
-  margin-right: -300px;
+  margin-right: 0; /* Removed fixed negative margin */
+  box-sizing: border-box; /* Ensure padding doesn't overflow */
 }
 
+/* Title styling */
 .title {
-  font-size: 24px;
-  margin-bottom: 20px;
-  color:black;
+  font-size: clamp(18px, 5vw, 24px); /* Responsive font size */
+  margin-bottom: clamp(10px, 2vw, 20px); /* Responsive margin */
+  color: black;
+  text-align: center; /* Centered for better mobile alignment */
 }
 
-.buttonadd{
+/* Add button styling */
+.buttonadd {
   background-color: #ff5069;
-  margin-left: 90%;
-  margin-bottom: 20px;
+  margin-left: 1070px; /* Align to right without fixed percentage */
+  margin-bottom: clamp(10px, 2vw, 20px); /* Responsive margin */
+  padding: clamp(8px, 2vw, 12px) clamp(15px, 3vw, 20px); /* Responsive padding */
+  border-radius: 5px;
+  display: inline-block;
+
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .buttonadd a {
   color: white;
   text-decoration: none;
+  font-size: clamp(14px, 3.5vw, 16px); /* Responsive font size */
 }
 
 .buttonadd:hover {
   background-color: #f02f4c;
 }
 
-
+/* Loader styling */
 .loader {
   text-align: center;
-  margin-top: 50px;
+  margin-top: clamp(20px, 5vw, 50px); /* Responsive margin */
 }
-.image{
-  width: 30%;
-  height: 40px;
+
+/* Image styling */
+.image {
+  width: clamp(50px, 20vw, 30%); /* Responsive width */
+  height: 40px; /* Kept fixed height, adjust if needed */
+  object-fit: cover; /* Ensure image fits well */
 }
+
+/* Error message styling */
 .error {
   text-align: center;
   color: red;
+  font-size: clamp(14px, 4vw, 16px); /* Responsive font size */
+  padding: 10px;
 }
 
+/* Main table styling */
 .tableMain {
   background: #1e1e1e;
-  color: rgb(24, 23, 23);
+  color: rgb(24, 23, 23); /* Consider adjusting for contrast */
   border-radius: 10px;
+  overflow-x: auto; /* Enable horizontal scrolling on mobile */
 }
 
+/* Actions container */
 .actionsContainer {
   display: inline-block;
   cursor: pointer;
+  position: relative; /* For popup positioning */
 }
 
+/* Three dots button */
 .threeDotsButton {
   background: none;
   border: none;
   color: white;
-  font-size: 18px;
+  font-size: clamp(16px, 4vw, 18px); /* Responsive font size */
   cursor: pointer;
+  padding: 5px;
 }
 
+/* Popup menu */
 .popup {
   position: absolute;
   background: #333;
   color: white;
-  padding: 10px;
+  padding: clamp(5px, 1.5vw, 10px); /* Responsive padding */
   border-radius: 5px;
   box-shadow: 0 4px 8px rgba(28, 27, 27, 0.2);
   z-index: 200;
+  width: clamp(100px, 25vw, 150px); /* Responsive width */
 }
 
+/* Popup options */
 .popupOption {
-  padding: 5px 10px;
+  padding: clamp(3px, 1vw, 5px) clamp(5px, 2vw, 10px); /* Responsive padding */
   cursor: pointer;
+  font-size: clamp(12px, 3.5vw, 14px); /* Responsive font size */
 }
 
 .popupOption:hover {
   background: #444;
 }
 
+/* Profile picture styling */
 .profilePic {
-  width: 50px;
-  height: 50px;
+  width: clamp(40px, 10vw, 50px); /* Responsive width */
+  height: clamp(40px, 10vw, 50px); /* Responsive height */
   border-radius: 50%;
+  object-fit: cover; /* Ensure image fits well */
 }
 
+/* Overlay for popup */
 .overlay {
   position: fixed;
   top: 0;
@@ -92,4 +124,63 @@
   height: 100%;
   background: rgba(15, 15, 15, 0.5);
   z-index: 999;
+}
+
+/* Media Queries for Additional Responsiveness */
+@media (max-width: 768px) {
+  .tableContainer {
+    padding: 8px; /* Reduced padding for tablets */
+  }
+
+  .buttonadd {
+    margin-left: 0; /* Center on smaller screens */
+    display: block;
+    width: fit-content;
+    margin: 0 auto clamp(10px, 2vw, 20px); /* Centered with margin */
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .image {
+    width: 20%; /* Slightly smaller on tablets */
+  }
+
+  .popup {
+    width: 120px; /* Fixed smaller width */
+  }
+}
+
+@media (max-width: 480px) {
+  .tableContainer {
+    padding: 5px; /* Minimal padding for mobile */
+  }
+
+  .buttonadd {
+    padding: 6px 12px; /* Smaller padding */
+  }
+
+  .loader {
+    margin-top: 20px; /* Reduced margin */
+  }
+
+  .image {
+    width: 15%; /* Even smaller on mobile */
+    height: 30px; /* Adjusted height */
+  }
+
+  .popup {
+    width: 100px; /* Smaller width for tiny screens */
+    padding: 5px; /* Reduced padding */
+  }
+
+  .popupOption {
+    padding: 3px 5px; /* Further reduced padding */
+  }
+
+  .profilePic {
+    width: 35px; /* Smaller profile pic */
+    height: 35px;
+  }
 }

@@ -172,9 +172,89 @@
 .Collapsed .ToggleButton {
   right: -25px;
 }
+/* Mobile-Specific Styles */
+@media (max-width: 480px) {
+  .Sidebar {
+    width: 100%; /* Full width on mobile */
+    height: auto; /* Adjust height to content */
+    flex-direction: column; /* Keep vertical layout */
+    position: fixed; /* Fix to top for mobile */
+    top: 0;
+    left: 0;
+    padding: 10px;
+    margin-left: 0;
+    border-radius: 0; /* Remove rounded corners on mobile */
+    transition: transform 0.3s ease; /* Smooth slide effect */
+    transform: translateX(0); /* Visible by default */
+    z-index: 2000;
+  }
 
-/* Responsive Styles */
-@media (max-width: 1024px) {
+  .Collapsed {
+    width: 60px; /* Collapsed width remains narrow */
+    height: 100vh; /* Full height when collapsed */
+    transform: translateX(0); /* Stay visible */
+  }
+
+  .Expanded {
+    width: 250px; /* Expanded width */
+  }
+
+  .ToggleButton {
+    top: 10px;
+    left: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+  }
+
+  .Expanded .ToggleButton {
+    left: 210px; /* Adjust for expanded state */
+  }
+
+  .Collapsed .ToggleButton {
+    left: 15px;
+  }
+
+  .Brand {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  .Brand img {
+    width: 50%; /* Slightly smaller logo */
+  }
+
+  .Collapsed .Brand img {
+    width: 40px;
+    height: 40px;
+    margin-top: 20px;
+  }
+
+  .Nav {
+    gap: 5px; /* Reduce gap between links */
+  }
+
+  .Link {
+    padding: 10px;
+    font-size: 14px;
+    gap: 10px;
+  }
+
+  .Icon {
+    font-size: 20px;
+  }
+
+  .DropdownContent {
+    padding-left: 15px;
+  }
+
+  .SubLink {
+    font-size: 12px;
+    padding: 8px 15px;
+  }
+}
+
+@media (max-width: 768px) and (min-width: 481px) {
   .Sidebar {
     width: 200px;
   }
@@ -185,77 +265,5 @@
 
   .Collapsed {
     width: 60px;
-  }
-
-  .Collapsed .ToggleButton {
-    left: 15px;
-  }
-}
-
-@media (max-width: 768px) {
-  .Sidebar {
-    width: 180px;
-  }
-
-  .Expanded .ToggleButton {
-    left: 140px;
-  }
-
-  .Collapsed {
-    width: 55px;
-  }
-
-  .Collapsed .ToggleButton {
-    left: 12px;
-  }
-
-  .Link {
-    font-size: 14px;
-    padding: 10px 12px;
-  }
-
-  .Icon {
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 480px) {
-  .Sidebar {
-    width: 100%;
-    height: auto;
-    flex-direction: row;
-    overflow-x: auto;
-    padding: 5px;
-  }
-
-  .Collapsed {
-    width: 100%;
-    flex-direction: row;
-  }
-
-  .Link {
-    padding: 8px;
-    font-size: 12px;
-  }
-
-  .ToggleButton {
-    top: 5px;
-    left: 10px;
-    width: 30px;
-    height: 30px;
-    font-size: 18px;
-  }
-
-  .Collapsed .ToggleButton {
-    left: 10px;
-  }
-
-  .Collapsed .Brand img {
-    width: 30px;
-    height: 30px;
-  }
-
-  .Brand {
-    margin-bottom: 0;
   }
 }

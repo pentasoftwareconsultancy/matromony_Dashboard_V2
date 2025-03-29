@@ -14,7 +14,7 @@ const Product = () => {
   const [popupPosition, setPopupPosition] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
 
-  const navigate = useNavigate(); // Navigation hook
+  const navigate = useNavigate();
 
   const theme = useMemo(
     () =>
@@ -68,10 +68,12 @@ const Product = () => {
 
   const handleEdit = () => {
     if (selectedRow) {
-      navigate(`/editprofile/${selectedRow._id}`);
+      // Pass the selected row data to Stepmain via navigation state
+      navigate(`/editprofile/${selectedRow._id}`, { state: { profileData: selectedRow } });
       closePopup();
     }
   };
+
 
   const handleDelete = async () => {
     if (selectedRow) {
@@ -79,7 +81,7 @@ const Product = () => {
         await axios.delete(
           `http://localhost:8000/api/v1/bride-groom/${selectedRow._id}`
         );
-        fetchData(); // Refresh data after delete
+        fetchData();
         closePopup();
       } catch (err) {
         console.error("Error deleting profile:", err);
@@ -89,23 +91,14 @@ const Product = () => {
 
   const columns = useMemo(
     () => [
-      {
-        accessorKey: "fullName",
-        header: "Name",
-      },
-      {
-        accessorKey: "mobileNumber",
-        header: "Mobile Number",
-      },
+      { accessorKey: "fullName", header: "Name" },
+      { accessorKey: "mobileNumber", header: "Mobile Number" },
       {
         accessorKey: "dateOfBirth",
         header: "Date of Birth",
         Cell: ({ cell }) => new Date(cell.getValue()).toLocaleDateString(),
       },
-      {
-        accessorKey: "city",
-        header: "Location",
-      },
+      { accessorKey: "city", header: "Location" },
       {
         accessorKey: "annualIncome",
         header: "Annual Income",
@@ -159,19 +152,12 @@ const Product = () => {
             <p>{error}</p>
           </div>
         ) : (
-          <MaterialReactTable
-            columns={columns}
-            data={data}
-            className={style.tablemain}
-          />
+          <MaterialReactTable columns={columns} data={data} className={style.tablemain} />
         )}
         {popupVisible && popupPosition && (
           <div
             className={style.popup}
-            style={{
-              top: popupPosition.top,
-              left: popupPosition.left,
-            }}
+            style={{ top: popupPosition.top, left: popupPosition.left }}
           >
             <div className={style.popupOption} onClick={handleView}>
               View
@@ -184,9 +170,7 @@ const Product = () => {
             </div>
           </div>
         )}
-        {popupVisible && (
-          <div className={style.overlay} onClick={closePopup}></div>
-        )}
+        {popupVisible && <div className={style.overlay} onClick={closePopup}></div>}
       </ThemeProvider>
     </div>
   );

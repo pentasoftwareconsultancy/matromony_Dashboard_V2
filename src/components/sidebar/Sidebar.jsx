@@ -49,6 +49,7 @@ const Sidebar = () => {
     
    
     { to: '/analytics', label: 'Analytics', icon: <FiBarChart2 /> },
+    { to: "/pricing", label: "Pricing", icon: <FiBarChart2 /> },
     // { to: '/mails', label: 'Mails', icon: <FiMail /> },
     // { to: '/settings', label: 'Settings', icon: <FiSettings /> },
   ];

@@ -17,24 +17,21 @@ import Eventmain from "./components/event/eventmain/Eventmain";
 import Addevent from "./components/event/addevent/Addevent";
 import SanchalakForm from "./components/categories/Sanchalakform";
 import MemberDetail from "./components/categories/Sanchalakdetail";
-// import Addgroom from './components/groom/addgroom/Addgroom';
-// import Groomform from './components/groom/groomform/Groomform';
 import VendorMain from "./components/vendormain/vendormain/Vendormain";
 import VendorForm from "./components/vendormain/vendorform/Vendorform";
 import Eventsdetail from "./components/event/Eventdetail/Eventdetail";
 import Blogmain from "./components/blog/blogmain/Blogmain";
 import Blogdetail from "./components/blog/blogdetail/Blogdetail";
 import Addblog from "./components/blog/blogform/Blogform";
-// import Step from '../../matrimoni1/my-react-app/src/Components/logins/register/step/Step';
 import Stepmain from "./components/groom/register/step/Step";
 import Notificationmain from "./components/notification/notificationmain/Notificationmain";
 import ProfileComponent from "./components/bride/profilecomponent/ProfileComponent";
 import AddEventImage from "./components/event/addeventimage/AddEventImage";
 import Addimage from "./components/event/addimage/Addimage";
-// import EditProfile from "./components/profile/EditProfile"; // Added EditProfile
-
-
-
+import PricingMain from "./components/pricing/pricingmain/Pricingmain";
+import PricingForm from "./components/pricing/pricingform/Pricingform";
+import PricingPlans from "./components/pricing/pricingPlans/PricingPlans";
+import VendorDetail from "./components/vendormain/vendordetail/Vendordetail";
 
 function App() {
   const [sidebarVisible, setSidebarVisible] = useState(false);
@@ -67,8 +64,6 @@ function App() {
               <Route path="/viewsanchalak" element={<MemberDetail />} />
               <Route path="/sanchalakdetail/:id" element={<MemberDetail />} />
               <Route path="/editsanchalak/:id" element={<SanchalakForm />} />
-              {/* <Route path='/addgroom' element={<Addgroom/>}/> */}
-              {/* <Route path="/addgroom" element={<Groomform/>}/> */}
               <Route path="/vendormain" element={<VendorMain />} />
               <Route path="/addvendor" element={<VendorForm />} />
               <Route path="/viewevent/:id" element={<Eventsdetail />} />
@@ -78,13 +73,17 @@ function App() {
               <Route path="/viewblog/:id" element={<Blogdetail />} />
               <Route path="/addprofile" element={<Stepmain />} />
               <Route path="/Notification" element={<Notificationmain />} />
-              
-              {/* ✅ Newly Added Routes */}
               <Route path="/profile/:id" element={<ProfileComponent />} />
-              {/* <Route path="/editprofile/:id" element={<Pro />} /> */}
-              <Route path="editprofile/:id" element={<Stepmain/>}/>
-              <Route path="/addimage" element={<AddEventImage/>}/>
-              <Route path="/addimage" element={<Addimage/>}/>
+              <Route path="/editprofile/:id" element={<Stepmain />} />
+              <Route path="/addimage" element={<AddEventImage />} />
+              <Route path="/addimagemain" element={<Addimage />} />
+              <Route path="/pricing" element={<PricingMain />} />
+              <Route path="/editpricing/:id" element={<PricingForm />} />
+              <Route path="/addpricing" element={<PricingForm />} />
+              <Route path="/viewpricing/:id" element={<PricingPlans />} />
+              <Route path="/vendordetail/:id" element={<VendorDetail />} />
+              {/* Fixed the typo here */}
+              <Route path="/editvendor/:id" element={<VendorForm />} />
             </Routes>
           </div>
         </div>

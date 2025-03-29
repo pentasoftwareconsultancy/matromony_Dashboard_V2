@@ -47,7 +47,7 @@ const Familyback = ({ formData, setFormData, setIsFormValid }) => {
   return (
     <div className={styles.formContainer}>
       <h2 className={styles.title}>Family Background</h2>
-      <form>
+      <form className={styles.form}>
         <div className={styles.section}>
           <h3 className={styles.detail}>Family Details</h3>
           <div className={styles.personal}>

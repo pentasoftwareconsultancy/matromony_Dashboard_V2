@@ -1,0 +1,159 @@
+.container {
+    display: flex;
+    /* margin-top: 80px; */
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+   
+    padding: 20px;
+    /* background-color: #f4f4f4; */
+}
+.main{
+    /* background-color: ; */
+    background-color: rgb(214, 232, 247);
+    /* padding-top: 10px; */
+}
+  .features {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 15px;
+  }
+  
+  .featureItem {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    position: relative;
+    padding-bottom: 12px; /* Add space for checkmark */
+  }
+  
+  .checkmark {
+    color: green; /* Checkmark color */
+    background-color: white; /* Background color of the checkmark (or transparent) */
+    border-radius: 50%; /* Circular background for the checkmark */
+    padding: 5px;
+    font-size: 1.4rem;
+    position: absolute;
+    bottom: -0px; /* Position the checkmark below the text */
+    left: -10%;
+    transform: translateX(-50%); /* Center align the checkmark */
+  }
+  
+.maintitle{
+text-align: center;
+padding-top: 10px;
+margin-bottom: 10px;
+font-size: 40px;
+font-weight: 600;
+margin-top: 50px;
+}
+.card {
+  
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 370px;
+    transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+/* Hover Effect */
+.card:hover {
+    color: rgb(21, 21, 21);
+    /* background-color: black; */
+}
+
+/* Ensure buttons remain visible on hover */
+/* .card:hover .button {
+    color: black;
+    background-color: white;
+} */
+
+.title {
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.duration {
+    font-size: 14px;
+    color: gray;
+}
+
+.description {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.features {
+    list-style: none;
+    margin-left: 50px;
+    /* margin-right: 50px; */
+    font-size: 30px;
+    padding: 0;
+}
+
+.features li {
+    padding: 5px 0;
+    color: black;
+    text-align: left;
+    font-size: 17px;
+}
+
+/* Button Styles */
+.button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 40%;
+    border-radius: 40px ;
+    border: none;
+    color: white;
+    margin-bottom: 30px;
+    font-size: 16px;
+    /* border-radius: 5px; */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Pricing Plan Specific Styles */
+.premium .button {
+    background-color: black;
+}
+
+/* .silver {
+    background-color: #fffefe;
+    color: rgb(9, 9, 9);
+    width: 40px;
+}
+
+.silver .button {
+    background-color: #f43974;
+} */
+
+.golden .button {
+    background-color: black;
+}
+
+/* Additional Hover Effects for Each Plan */
+/* .premium:hover {
+    background-color: black;
+    color: white;
+} */
+
+/* .silver:hover {
+    background-color:  #f43974;
+    color: white;
+} */
+
+/* .golden:hover {
+    background-color: black;
+    color: white;
+} */

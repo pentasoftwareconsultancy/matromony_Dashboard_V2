@@ -1,14 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FaCheck } from "react-icons/fa";
 import styles from "./Step.module.css";
 import Profile from "../profile/Profile";
 import FamilyBackground from "../familyback/Familyback";
 import Education from "../education/Education";
 import Horoscope from "../horoscope/Horoscope";
+import { registerBrideGroom } from "./api";
 
 const Stepmain = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const initialFormData = {
     fullName: "",
@@ -19,80 +23,101 @@ const Stepmain = () => {
     city: "",
     gender: "",
     maritalStatus: "",
+    noOfChildren: "",
     height: "",
     bodyType: "",
+    weight: "",
     complexion: "",
     bloodGroup: "",
+    smoke: false,
+    drink: false,
+    specialCase: "",
     educationLevel: "",
     educationField: "",
+    educationDescription: "",
     occupation: "",
+    occupationDescription: "",
+    companyName: "",
+    residencyStatus: "",
     annualIncome: "",
     fatherName: "",
+    fatherOccupation: "",
     motherName: "",
+    motherOccupation: "",
     brothers: "",
     sisters: "",
+    culturalValues: "",
+    aboutFamily: "",
+    motherTongue: "",
     religion: "",
+    timeOfBirth: "",
+    cityOfBirth: "",
     isManglik: false,
+    gotra: "",
+    ras: "",
+    gan: "",
+    nadi: "",
+    charan: "",
     partnerAgeFrom: "",
     partnerAgeTo: "",
     partnerEducation: "",
     partnerLocation: "",
     partnerPackage: "",
     partnerAbout: "",
-    profilePhoto: "",
+    profilePhoto: null,
+    panCardNumber: "",
+    companyId: "",
     aadharNumber: "",
-    aadharPhoto: "",
+    aadharPhoto: null,
+    passportNumber: "",
+    socialFacebook: "",
+    socialInstagram: "",
+    socialLinkedIn: "",
     isApproved: false,
   };
 
-  // State to store form data
   const [formData, setFormData] = useState(() => {
     const savedData = localStorage.getItem("formData");
     return savedData ? JSON.parse(savedData) : initialFormData;
   });
 
-  // State to track which steps are validated and complete
-  const [completedSteps, setCompletedSteps] = useState([]);
-
-  // Save form data to localStorage
   useEffect(() => {
     localStorage.setItem("formData", JSON.stringify(formData));
   }, [formData]);
 
-  // Validate each step to allow marking as complete
-  const validateStep = (stepId) => {
-    switch (stepId) {
-      case 1:
-        return formData.fullName && formData.email && formData.mobileNumber;
-      case 2:
-        return formData.educationLevel && formData.educationField;
-      case 3:
-        return formData.fatherName && formData.motherName;
-      case 4:
-        return formData.religion && formData.isManglik !== "";
-      default:
-        return false;
-    }
-  };
-
-  // Handle next step and mark step as complete if valid
   const handleNext = () => {
-    if (validateStep(currentStep)) {
-      if (!completedSteps.includes(currentStep)) {
-        setCompletedSteps((prev) => [...prev, currentStep]);
-      }
-      setCurrentStep((prev) => prev + 1);
-    } else {
-      alert("⚠️ Please complete the current step before proceeding.");
+    if (currentStep < steps.length) {
+      setCompletedSteps((prev) => [...prev, currentStep]);
+      setCurrentStep(currentStep + 1);
     }
   };
 
-  // Handle going to the previous step
   const handlePrevious = () => {
-    setCurrentStep((prev) => prev - 1);
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+    }
   };
 
-  // Array of steps with respective components
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (isSubmitting) return;
+
+    setIsSubmitting(true);
+    try {
+      const response = await registerBrideGroom(formData);
+      alert("🎉 Registration successful!");
+      console.log("✅ Form Data Submitted:", response);
+      localStorage.removeItem("formData");
+      setCompletedSteps([]);
+      navigate("/login");
+    } catch (error) {
+      console.error("❌ Submission failed:", error.message);
+      alert(`❌ Submission failed: ${error.message}`);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const steps = [
     {
       id: 1,
@@ -122,46 +147,37 @@ const Stepmain = () => {
     },
   ];
 
-
   return (
     <div className={styles.stepContainer}>
-      {/* Step bar with connected steps */}
       <div className={styles.stepBar}>
         {steps.map((step, index) => (
           <div key={step.id} className={styles.stepWrapper}>
-            {/* Step Title Added Here */}
-
-            <div className={styles.numTitle}>
+            <div>
               <div className={styles.stepTitle}>{step.title}</div>
-
-              {/* Step Number/Indicator */}
               <div
-                className={`${styles.step} ${currentStep === step.id ? styles.active : ""
-                  } ${completedSteps.includes(step.id) ? styles.completed : ""}`}
+                className={`${styles.step} ${
+                  currentStep === step.id ? styles.active : ""
+                } ${completedSteps.includes(step.id) ? styles.completed : ""}`}
                 onClick={() => setCurrentStep(step.id)}
               >
-                {completedSteps.includes(step.id) ? "✅" : step.label}
+                {completedSteps.includes(step.id) ? <FaCheck /> : step.label}
               </div>
             </div>
-
-            {/* Progress Line */}
             {index < steps.length - 1 && (
               <div
-                className={`${styles.progressLine} ${completedSteps.includes(step.id) ? styles.filled : ""
-                  }`}
+                className={`${styles.progressLine} ${
+                  completedSteps.includes(step.id) ? styles.filled : ""
+                }`}
               />
             )}
           </div>
         ))}
       </div>
 
-
-      {/* Step content */}
       <div className={styles.stepContent}>
         {steps.find((step) => step.id === currentStep)?.component}
       </div>
 
-      {/* Action buttons */}
       <div className={styles.stepActions}>
         <button
           className={styles.previous}
@@ -173,13 +189,10 @@ const Stepmain = () => {
         {currentStep === steps.length ? (
           <button
             className={styles.submit}
-            onClick={() =>
-              alert(
-                "🎉 All steps completed successfully! Form submitted."
-              )
-            }
+            onClick={handleSubmit}
+            disabled={isSubmitting}
           >
-            Submit
+            {isSubmitting ? "Submitting..." : "Submit"}
           </button>
         ) : (
           <button className={styles.next} onClick={handleNext}>

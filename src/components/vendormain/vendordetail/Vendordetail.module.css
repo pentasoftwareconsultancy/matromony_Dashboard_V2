@@ -1,0 +1,221 @@
+.cardDetail {
+    max-width: 90%; /* Slightly increased from 80% for smaller screens */
+    margin: clamp(20px, 5vw, 80px) auto; /* Responsive margin */
+    padding: clamp(10px, 2vw, 20px); /* Responsive padding */
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+  }
+  
+  .eventContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two columns for larger screens */
+    gap: clamp(10px, 2vw, 20px);
+    margin-top: clamp(20px, 4vw, 50px);
+    margin-bottom: clamp(10px, 2vw, 20px);
+  }
+  
+  .gallerymian {
+    text-align: center;
+    margin-bottom: clamp(10px, 2vw, 20px);
+    font-size: clamp(20px, 5vw, 35px); /* Responsive font size */
+  }
+  
+  .title {
+    margin-top: clamp(10px, 2vw, 20px);
+    text-align: center;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+  
+  .imagecard {
+    width: 100%;
+  }
+  
+  .imagemain {
+    width: 100%; /* Changed from fixed 560px */
+    height: clamp(200px, 40vw, 450px); /* Responsive height */
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .textContent {
+    padding: clamp(20px, 4vw, 50px);
+    margin-top: clamp(-30px, -5vw, -50px);
+    display: flex;
+    flex-direction: column;
+    gap: clamp(5px, 1vw, 10px);
+  }
+  
+  .imagegallery {
+    width: 100%;
+    height: clamp(25vh, 40vw, 45vh); /* Responsive height */
+    border-radius: 20px;
+  }
+  
+  .phonemain {
+    font-size: clamp(16px, 3vw, 24px);
+  }
+  
+  .descriptions {
+    font-size: clamp(16px, 3vw, 25px);
+  }
+  
+  .description,
+  .content {
+    font-size: clamp(0.875rem, 2vw, 1rem);
+    margin-left: clamp(20px, 5vw, 100px);
+    margin-right: clamp(20px, 5vw, 100px);
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  .descriptionmain {
+    font-size: clamp(14px, 2.5vw, 18px);
+    margin-left: clamp(20px, 4vw, 50px);
+    margin-right: clamp(20px, 4vw, 50px);
+    text-align: justify;
+  }
+  
+  .participantTitle {
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
+    margin-bottom: clamp(5px, 1vw, 10px);
+  }
+  
+  .participantsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(150px, 25vw, 200px), 1fr));
+    gap: clamp(10px, 2vw, 20px);
+  }
+  
+  .participant {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: clamp(8px, 2vw, 15px);
+    text-align: left;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .participant h4 {
+    font-size: clamp(1rem, 2.5vw, 1.2rem);
+    margin-bottom: clamp(5px, 1vw, 10px);
+    color: #333;
+  }
+  
+  .participant p {
+    font-size: clamp(0.75rem, 1.5vw, 0.9rem);
+    margin: clamp(2px, 1vw, 5px) 0;
+    color: #555;
+  }
+  
+  strong {
+    color: #000;
+  }
+  
+  .gallery {
+    margin-top: clamp(15px, 3vw, 30px);
+    margin-left: clamp(20px, 4vw, 50px);
+    margin-right: clamp(20px, 4vw, 50px);
+  }
+  
+  .galleryGrid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(clamp(200px, 30vw, 260px), 1fr));
+    gap: clamp(10px, 2vw, 15px);
+  }
+  
+  .titlegallery {
+    font-size: clamp(16px, 2.5vw, 20px);
+  }
+  
+  .galleryItem .imagemain {
+    width: 100%;
+    height: clamp(100px, 20vw, 150px);
+    object-fit: cover;
+    margin-left: 0; /* Removed fixed margins */
+    margin-right: 0;
+    border-radius: 8px;
+  }
+  
+  .galleryItem {
+    display: grid;
+  }
+  
+  .galleryInfo {
+    text-align: center;
+    margin-top: clamp(2px, 1vw, 5px);
+  }
+  
+  .reviews {
+    margin-top: clamp(15px, 3vw, 30px);
+  }
+  
+  .review {
+    margin-bottom: clamp(8px, 2vw, 15px);
+    padding: clamp(5px, 1.5vw, 10px);
+    border: 1px solid #ddd;
+    border-radius: 8px;
+  }
+  
+  .reviewDate {
+    font-size: clamp(0.7rem, 1.5vw, 0.85rem);
+    color: #777;
+  }
+  
+  /* Media Queries for Mobile */
+  @media screen and (max-width: 768px) {
+    .eventContent {
+        grid-template-columns: 1fr; /* Single column for tablets/mobile */
+    }
+  
+    .textContent {
+        padding: 20px;
+    }
+  
+    .description,
+    .content {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+  
+    .descriptionmain {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+  
+    .galleryGrid {
+        grid-template-columns: 1fr 1fr; /* Two columns for medium screens */
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .cardDetail {
+        max-width: 95%; /* Nearly full width on small screens */
+        margin: 10px auto;
+        padding: 10px;
+    }
+  
+    .galleryGrid {
+        grid-template-columns: 1fr; /* Single column for small screens */
+    }
+  
+    .imagemain {
+        height: 200px; /* Smaller height for tiny screens */
+    }
+  
+    .imagegallery {
+        height: 30vh;
+    }
+  
+    .textContent {
+        padding: 15px;
+    }
+  
+    .participantsGrid {
+        grid-template-columns: 1fr; /* Single column for participants */
+    }
+  }

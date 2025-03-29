@@ -21,7 +21,10 @@
   background-color: var(--bg-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
 }
-
+.titlebride{
+  /* margin-left: 400px; */
+  text-align: center;
+}
 /* =========================
    Title of the page
 ========================= */
@@ -64,7 +67,8 @@
   cursor: pointer;
   text-align: center;
   font-size: 16px;
-  margin: 0 auto 15px auto;
+  /* margin-left: */
+  margin: 0 auto 15px 400px;
 }
 
 .add a {
@@ -82,6 +86,7 @@
 .main {
   display: flex;
   justify-content: center;
+  margin-left: 500px;
   align-items: center;
   flex-wrap: wrap;
 }

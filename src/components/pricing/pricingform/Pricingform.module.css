@@ -1,0 +1,144 @@
+/* Main container for the form */
+.main {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+
+
+
+
+  /* .readOnlyInput {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: not-allowed; 
+  } */
+  
+  /* Title for the form */
+  .maintitle {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  /* General form styles */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  /* Label styles */
+  label {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #333;
+  }
+  
+  /* Input field styles */
+  input[type="text"],
+  input[type="number"],
+  textarea {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    border-color: #f74c4c;
+  }
+  
+  /* Textarea specific styling */
+  textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  /* Button styles */
+  .feature {
+    padding: 10px 15px;
+    font-size: 1rem;
+    width: 100px;
+    color: #fff;
+    background-color: #f95c5c;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .feature:hover {
+    background-color: #f7336b;
+  }
+  
+  /* Styling for the feature list */
+  .featureRow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .featureRow input {
+    flex-grow: 1;
+  }
+  
+  .mainbutton {
+    background-color: #ff5c6c;
+    font-size: 1rem;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .featureRow .mainbutton:hover {
+    background-color: #9e9898;
+  }
+  
+  /* Add feature button styling */
+  .mainbutton[type="button"]:first-child {
+    margin-top: 10px;
+    width: 100%;
+    background-color: #28a745;
+  }
+  
+  .mainbutton[type="button"]:first-child:hover {
+    background-color: #218838;
+  }
+  
+  /* General layout tweaks */
+  @media (max-width: 768px) {
+    .main {
+      padding: 15px;
+    }
+  
+    .maintitle {
+      font-size: 1.3rem;
+    }
+  
+    .form {
+      gap: 12px;
+    }
+  
+    input[type="text"],
+    input[type="number"],
+    textarea {
+      font-size: 0.9rem;
+    }
+  
+    button {
+      font-size: 0.9rem;
+    }
+  }
+  

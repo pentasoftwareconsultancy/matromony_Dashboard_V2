@@ -3,32 +3,50 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 6px 20px;
+  padding: 10px 20px;
   position: sticky;
   top: 0;
   z-index: 1000;
-  color: var(--text-color); /* Dynamic text color */
-  transition: background-color 0.3s ease, color 0.3s ease;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ffffff, #f0f4f8); /* Subtle gradient */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Dark Mode */
+[data-theme="dark"] .Container {
+  background: linear-gradient(135deg, #1e2a38, #2c3e50);
+  color: #ffffff;
 }
 
 /* Text Style for Titles */
 .Text h5 {
-  font-size: 1.1rem;
-  color: var(--text-color);
-  font-weight: 600;
+  font-size: 1.2rem;
+  font-weight: 700;
   margin: 0;
+  color: var(--text-color);
+  letter-spacing: 0.5px;
 }
 
 /* Search Bar Styling */
 .Search {
   display: flex;
   align-items: center;
-  border: 1px solid var(--secondary-color); /* Dynamic border color */
-  border-radius: 25px;
-  border: 1px solid;
-  padding: 5px 15px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  padding: 8px 15px;
   width: 320px;
-  transition: border-color 0.3s ease;
+  background: #ffffff;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.Search:hover {
+  border-color: #1a73e8;
+  box-shadow: 0 0 8px rgba(26, 115, 232, 0.2);
 }
 
 .Search input {
@@ -38,40 +56,50 @@
   width: 100%;
   padding-left: 10px;
   font-size: 1rem;
-  color: var(--text-color); /* Dynamic text color */
+  color: var(--text-color);
 }
 
 .Search input::placeholder {
   color: var(--text-color);
-  opacity: 0.7;
+  opacity: 0.6;
 }
 
 .SearchIcon {
   color: var(--text-color);
   font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.SearchIcon:hover {
+  color: #1a73e8;
 }
 
 /* Icons Container */
 .Icons {
   display: flex;
-  gap: 25px;
+  gap: 20px;
   align-items: center;
 }
 
 /* Icon Styling */
 .IconWrapper {
   position: relative;
+  transition: transform 0.2s ease;
+}
+
+.IconWrapper:hover {
+  transform: scale(1.1);
 }
 
 .Icon {
-  font-size: 1.7rem;
-  color: var(--text-color); /* Dynamic text color */
+  font-size: 1.8rem;
+  color: var(--text-color);
   cursor: pointer;
-  transition: color 0.3s ease;
 }
 
 .Icon:hover {
-  color: #1a73e8; /* Hover effect */
+  color: #1a73e8;
 }
 
 /* Badge Styling */
@@ -79,25 +107,58 @@
   position: absolute;
   top: -5px;
   right: -10px;
-  background-color: var(--badge-color, #ff5252); /* Customizable badge color */
+  background-color: #ff5252;
   color: #fff;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   padding: 2px 6px;
   border-radius: 50%;
   font-weight: bold;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Profile Section */
+.Profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.Profile:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.ProfileName {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
 .ProfileDropdown {
   position: absolute;
-  top: 50px; 
-  right: 10px;
-  border-radius: 15px;
-  background-color: white;
-  border: 1px solid #ddd;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  display: none; 
+  top: 100%;
+  right: 0;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(0, 0, 0, 0.05);
   z-index: 1000;
+  min-width: 180px;
+  animation: dropdownFade 0.2s ease-in-out;
+}
+
+@keyframes dropdownFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .ProfileDropdown ul {
@@ -109,15 +170,23 @@
 .ProfileDropdown li {
   padding: 8px 15px;
   cursor: pointer;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
 }
 
 .ProfileDropdown li:hover {
-  background-color: #f0f0f0;
+  background-color: #f0f4f8;
+  border-radius: 5px;
 }
 
-/* Show the dropdown when profileDropdown is true */
-.Profile > .ProfileDropdown {
-  display: block;
+/* Dark Mode for Dropdown */
+[data-theme="dark"] .ProfileDropdown {
+  background: #2c3e50;
+  color: #ffffff;
+}
+
+[data-theme="dark"] .ProfileDropdown li:hover {
+  background-color: #3b4d61;
 }
 
 /* Theme Selector */
@@ -127,34 +196,103 @@
 }
 
 .ThemeDropdown {
-  padding: 8px;
-  background-color: var(--bg-color); /* Dynamic background color */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  color: inherit;
-  font-size: 1rem;
+  padding: 8px 12px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  color: var(--text-color);
+  font-size: 0.95rem;
   outline: none;
   width: 150px;
-  transition: border-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .ThemeDropdown:hover {
   border-color: #1a73e8;
+  box-shadow: 0 0 5px rgba(26, 115, 232, 0.2);
 }
 
-.ThemeDropdown optgroup {
-  font-weight: bold;
+[data-theme="dark"] .ThemeDropdown {
+  background: #3b4d61;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
-.ThemeDropdown option {
-  background: inherit;
-  color: inherit;
+/* Menu Toggle (Hamburger) */
+.MenuToggle {
+  display: none;
+  font-size: 1.8rem;
+  color: var(--text-color);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.MenuToggle:hover {
+  transform: scale(1.1);
+}
+
+/* Mobile Nav Menu */
+.MobileNav {
+  display: none;
+  flex-direction: column;
+  background: #ffffff;
+  width: 100%;
+  padding: 15px;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.MobileNav.active {
+  display: flex;
+}
+
+[data-theme="dark"] .MobileNav {
+  background: #2c3e50;
+}
+
+.MobileNavItem {
+  padding: 12px;
+  font-size: 1rem;
+  color: var(--text-color);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.MobileNavItem:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.MobileNavItem a {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
 }
 
 /* Responsive Design */
+
+/* Tablets (up to 768px) */
 @media (max-width: 768px) {
+  .Container {
+    padding: 8px 15px;
+  }
+
   .Search {
-    width: 250px; /* Smaller search bar on tablets */
+    width: 200px;
   }
 
   .Icons {
@@ -162,55 +300,69 @@
   }
 
   .ProfileName {
-    display: none; /* Hides profile name on tablets */
+    display: none;
+  }
+
+  .ThemeSelector {
+    display: none;
   }
 }
 
+/* Mobile Devices (up to 480px) */
 @media (max-width: 480px) {
-  /* Hides the search bar on small screens */
+  .Container {
+    justify-content: space-between;
+    padding: 8px 10px;
+  }
+
+  .Text h5 {
+    font-size: 1rem;
+  }
+
   .Search {
     display: none;
   }
 
   .Icons {
-    gap: 10px; /* Adjusts icon spacing */
+    display: none;
   }
 
-  /* Menu Toggle */
+  .ThemeSelector {
+    display: none;
+  }
+
+  .Profile {
+    display: none;
+  }
+
   .MenuToggle {
     display: block;
-    font-size: 1.5rem;
-    color: var(--text-color); /* Dynamic text color for the menu toggle */
   }
 
-  /* Mobile Nav Menu */
-  .MobileNav {
-    display: none;
-    flex-direction: column;
-    background-color: var(--bg-color);
-    width: 100%;
-    padding: 10px;
-    position: absolute;
-    top: 60px;
-    left: 0;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  }
-
-  .MobileNav.active {
+  .MobileNav .Search {
     display: flex;
+    width: 100%;
+    margin-bottom: 15px;
   }
 
-  .MobileNavItem {
-    padding: 10px;
-    font-size: 1rem;
-    color: var(--text-color);
-    text-align: center;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-
-  .MobileNavItem:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+  .MobileNav .ThemeDropdown {
+    width: 100%;
+    margin-bottom: 15px;
   }
 }
 
+/* Small Mobile Devices (up to 360px) */
+@media (max-width: 360px) {
+  .Text h5 {
+    font-size: 0.9rem;
+  }
+
+  .MenuToggle {
+    font-size: 1.6rem;
+  }
+
+  .MobileNavItem {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}

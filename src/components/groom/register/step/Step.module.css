@@ -1,6 +1,7 @@
 /* Container for the step component */
 .stepContainer {
-  max-width: 100%;
+ width: 100%;
+  /* margin-left: 100px; */
   margin: 60px auto;
   padding: 30px;
   background: linear-gradient(145deg, #ffffff, #f3f3f3);
@@ -16,6 +17,7 @@
   align-items: center;
   position: relative;
   margin-bottom: 40px;
+  /* margin-left: -100px; */
 }
 
 /* Wrapper for each step and its connected line */
@@ -28,7 +30,6 @@
 /* Individual step button */
 .step {
   padding: 12px;
-  
   background-color: #f0f0f0;
   border-radius: 50%;
   cursor: pointer;
@@ -72,7 +73,8 @@
 /* Line between steps */
 .progressLine {
   margin-top: 35px;
-  width: 350px;
+  /* margin-left: 100px; */
+  width: 400px;
   height: 6px;
   background-color: #ddd;
   border-radius: 4px;
@@ -144,51 +146,222 @@
   cursor: not-allowed;
 }
 
-.numTitle{
-
+.numTitle {
+  /* Empty in your original CSS */
 }
 
 .stepTitle {
   display: flex;
   flex-direction: row;
-  margin-bottom:10px;
-  width: 1px;
+  margin-bottom: 10px;
+  width: 0px;
+  font-size: 15px;
+  margin-left: 10px;
+  padding: 5px;
   text-align: center;
   justify-content: center;
   align-items: center;
 }
 
 
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-  .stepContainer {
-    width: 90%;
-    padding: 20px;
-  }
+
+/* Large Desktops (1200px - 1800px) - Corrected Range */
+@media (min-width: 1200px)  {
 
   .stepBar {
-    flex-direction: column;
-    margin-bottom: 30px;
+    width: 20%; /* Consistent fixed width */
   }
+  .step {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  .progressLine {
+    width: 200px; /* Adjusted from 900px for consistency */
+    height: 6px;
+  }
+  .stepContent {
+    padding: 20px;
+  }
+  .previous, .next, .submit {
+    padding: 12px 24px;
+  }
+  .stepTitle {
+    font-size: 1rem;
+  }
+}
 
-  .stepWrapper {
-    flex-direction: column;
-    align-items: center;
+/* Large desktops (up to 1600px) */
+/* @media (max-width: 1550px) {
+  .stepContainer {
+    max-width: 100%;
+    padding: 30px;
   }
 
   .progressLine {
-    width: 6px;
-    height: 50px;
-    margin-top: 5px;
+    width: 330px;
   }
 
   .step {
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+
+  .stepContent {
+    padding: 20px;
+  }
+
+  .previous,
+  .next,
+  .submit {
+    padding: 12px 24px;
+  }
+} */
+
+
+/* Responsive design for all mobile devices */
+
+@media (min-width: 1500px)  {
+  .stepContainer {
+    max-width: 100%; /* Adjusted from 100% for consistency */
+    padding: 30px;
+  }
+  .stepBar {
+    width:99%; /* Consistent fixed width */
+  }
+  .step {
+    width: 45px;
+    height: 45px;
+    font-size: 1rem;
+  }
+  .progressLine {
+    width: 330px; /* Adjusted from 900px for consistency */
+    height: 6px;
+  }
+  .stepContent {
+    padding: 20px;
+  }
+  .previous, .next, .submit {
+    padding: 12px 24px;
+  }
+  .stepTitle {
+    font-size: 1rem;
+  }
+}
+
+
+/* Tablets (up to 768px) */
+@media (max-width: 768px) {
+  .stepContainer {
+    max-width: 95%;
+    padding: 20px;
+    margin: 40px auto;
+  }
+
+  .stepBar {
+    justify-content: space-around;
+    margin-bottom: 30px;
+  }
+
+  .progressLine {
+    width: 150px;
+  }
+
+  .step {
+    width: 38px;
+    height: 38px;
     font-size: 0.9rem;
   }
 
   .stepContent {
     padding: 15px;
+  }
+
+  .previous,
+  .next,
+  .submit {
+    padding: 10px 20px;
+    /* display: flex; */
+  }
+}
+
+/* Medium to small phones (up to 480px) */
+@media (max-width: 480px) {
+  .stepContainer {
+    max-width:83%;
+    padding: 15px;
+    margin: 5px 5px;
+    margin-left: 52px;
+  }
+
+  .stepBar {
+    flex-direction: row; /* Stack steps vertically */
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .stepWrapper {
+    flex-direction: row;
+    margin: 10px 0;
+  }
+
+  .progressLine {
+    width: 6px; /* Vertical line */
+    width: 42px; /* Height instead of width for vertical orientation */
+    margin: 0;
+    margin-top: 45px;
+    margin-bottom: 10px;
+  }
+
+  .step {
+    width: 35px;
+    height: 35px;
+    font-size: 0.85rem;
+  }
+
+  .stepContent {
+    padding: 12px;
+  }
+
+  .stepActions {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .previous,
+  .next,
+  .submit {
+    width: 100%;
+    padding: 10px;
+  }
+}
+
+/* Very small phones (up to 320px) */
+@media (max-width: 320px) {
+  .stepContainer {
+    padding: 10px;
+    margin: 15px 5px;
+  }
+
+  .step {
+    width: 30px;
+    height: 30px;
+    font-size: 0.8rem;
+  }
+
+  .progressLine {
+    height: 30px;
+  }
+
+  .stepContent {
+    padding: 10px;
+  }
+
+  .previous,
+  .next,
+  .submit {
+    padding: 8px;
+    font-size: 0.9rem;
   }
 }

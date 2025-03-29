@@ -4,7 +4,7 @@ import { MaterialReactTable } from "material-react-table";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Dialog, DialogTitle, DialogContent, DialogActions, Button, Menu, MenuItem, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate to navigate programmatically
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./VendorMain.module.css";
 
 const Data = {
@@ -21,14 +21,12 @@ const VendorMain = () => {
   const [error, setError] = useState(null);
   const [themeMode, setThemeMode] = useState(Data.themeOptions.light);
   const [selectedVendor, setSelectedVendor] = useState(null);
-  const [dialogType, setDialogType] = useState(""); // "view", "edit", "delete"
+  const [dialogType, setDialogType] = useState("");
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-
   const [menuAnchorEl, setMenuAnchorEl] = useState(null);
   const [menuVendor, setMenuVendor] = useState(null);
   const navigate = useNavigate();
 
-  // Fetch vendors
   const fetchVendors = async () => {
     try {
       const response = await axios.get("http://localhost:8000/api/v1/vendors");
@@ -53,21 +51,21 @@ const VendorMain = () => {
       setThemeMode(selectedMode);
       document.body.setAttribute("data-bg", "");
     } else {
-      setThemeMode(Data.themeOptions.light); // Default to light
-      document.body.setAttribute("data-bg", selectedMode); // Set custom background
+      setThemeMode(Data.themeOptions.light);
+      document.body.setAttribute("data-bg", selectedMode);
     }
   };
 
   const handleDialogOpen = (type, vendor) => {
     if (type === "edit") {
-      navigate(`/addvendor/${vendor._id}`);
-    } else if (type === "/viewvendor") {
-      navigate(`/viewvendor/${vendor._id}`);
-    } else {
+      navigate(`/editvendor/${vendor._id}`, { state: { profileData: vendor } });
+    } else if (type === "view") {
+      navigate(`/vendordetail/${vendor._id}`);
+    } else if (type === "delete") {
       setDialogType(type);
       setSelectedVendor(vendor);
       setIsDialogOpen(true);
-      setMenuAnchorEl(null); // Close menu when dialog opens
+      setMenuAnchorEl(null);
     }
   };
 
@@ -80,7 +78,7 @@ const VendorMain = () => {
   const handleDeleteConfirm = async () => {
     try {
       await axios.delete(`http://localhost:8000/api/v1/vendors/${selectedVendor._id}`);
-      setVendors(vendors.filter((v) => v._id !== selectedVendor._id)); // Update UI
+      setVendors(vendors.filter((v) => v._id !== selectedVendor._id));
       handleDialogClose();
     } catch (err) {
       alert("Failed to delete vendor. Please try again.");
@@ -168,16 +166,13 @@ const VendorMain = () => {
           <Link to="/addvendor">Add Vendor</Link>
         </button>
       </div>
-
       <div className={styles.table_container}>
         <ThemeProvider theme={theme}>
           <MaterialReactTable columns={columns} data={vendors} />
         </ThemeProvider>
       </div>
-
-      {/* Delete Confirmation Dialog */}
       <Dialog open={isDialogOpen} onClose={handleDialogClose}>
-        {dialogType === "delete" ? (
+        {dialogType === "delete" && (
           <>
             <DialogTitle>Confirm Deletion</DialogTitle>
             <DialogContent>
@@ -190,7 +185,7 @@ const VendorMain = () => {
               </Button>
             </DialogActions>
           </>
-        ) : null}
+        )}
       </Dialog>
     </div>
   );

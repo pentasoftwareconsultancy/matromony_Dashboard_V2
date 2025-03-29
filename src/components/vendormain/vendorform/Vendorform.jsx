@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './VendorForm.module.css'; // CSS module import
+import styles from './VendorForm.module.css';
+import { useParams, useNavigate } from 'react-router-dom';
 
 const VendorForm = () => {
+  const { id } = useParams(); // Get vendor ID from URL params
+  const navigate = useNavigate();
   const [vendorData, setVendorData] = useState({
     title: '',
     name: '',
@@ -11,15 +14,33 @@ const VendorForm = () => {
     address: '',
     services: [],
     profilePic: [],
-    galleryImages: [
-      { title: '', description: '', image: null, feedback: '' },
-    ],
+    galleryImages: [{ title: '', description: '', image: null, feedback: '' }],
     description: '',
     isVerified: false,
     ratings: 0,
   });
-
   const [successMessage, setSuccessMessage] = useState(false);
+
+  // Fetch existing vendor data if editing
+  useEffect(() => {
+    if (id) {
+      const fetchVendor = async () => {
+        try {
+          const response = await axios.get(`http://localhost:8000/api/v1/vendors/${id}`);
+          const data = response.data.data;
+          setVendorData({
+            ...data,
+            profilePic: data.profilePicUrl || [],
+            services: data.services || [],
+            galleryImages: data.galleryImages.length > 0 ? data.galleryImages : [{ title: '', description: '', image: null, feedback: '' }],
+          });
+        } catch (error) {
+          console.error('Error fetching vendor:', error);
+        }
+      };
+      fetchVendor();
+    }
+  }, [id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -64,6 +85,19 @@ const VendorForm = () => {
     setVendorData({ ...vendorData, galleryImages: updatedGalleryImages });
   };
 
+  const handleServiceChange = (e) => {
+    const { value, checked } = e.target;
+    setVendorData((prevData) => {
+      let updatedServices = [...prevData.services];
+      if (checked) {
+        updatedServices.push(value);
+      } else {
+        updatedServices = updatedServices.filter(service => service !== value);
+      }
+      return { ...prevData, services: updatedServices };
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -98,36 +132,34 @@ const VendorForm = () => {
     });
 
     try {
-      const response = await axios.post('http://localhost:8000/api/v1/vendors/create', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('Vendor created:', response.data);
-      setSuccessMessage(true); // Set success message state to true after successful submission
-      setTimeout(() => setSuccessMessage(false), 3000); // Hide success message after 3 seconds
+      if (id) {
+        // Update existing vendor
+        const response = await axios.put(`http://localhost:8000/api/v1/vendors/${id}`, formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        console.log('Vendor updated:', response.data);
+      } else {
+        // Create new vendor
+        const response = await axios.post('http://localhost:8000/api/v1/vendors/create', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' },
+        });
+        console.log('Vendor created:', response.data);
+      }
+      setSuccessMessage(true);
+      setTimeout(() => {
+        setSuccessMessage(false);
+        navigate('/'); // Redirect back to VendorMain after success
+      }, 3000);
     } catch (error) {
-      console.error('Error creating vendor:', error);
+      console.error('Error submitting vendor:', error);
     }
   };
 
-  const handleServiceChange = (e) => {
-    const { value, checked } = e.target;
-    setVendorData((prevData) => {
-      let updatedServices = [...prevData.services];
-      if (checked) {
-        updatedServices.push(value); // Add service if checked
-      } else {
-        updatedServices = updatedServices.filter(service => service !== value); // Remove service if unchecked
-      }
-      return { ...prevData, services: updatedServices };
-    });
-  };
-
+  // Rest of the form JSX remains largely the same, just adding a dynamic title
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
+      <h2>{id ? 'Edit Vendor' : 'Add New Vendor'}</h2>
       <div className={styles.main}>
-        {/* Vendor Title */}
         <div className={styles.inputGroup}>
           <label htmlFor="title">Title</label>
           <input
@@ -138,8 +170,6 @@ const VendorForm = () => {
             placeholder="Title"
           />
         </div>
-
-        {/* Vendor Name */}
         <div className={styles.inputGroup}>
           <label htmlFor="name">Name</label>
           <input
@@ -151,8 +181,6 @@ const VendorForm = () => {
             placeholder="Vendor Name"
           />
         </div>
-
-        {/* Vendor Email */}
         <div className={styles.inputGroup}>
           <label htmlFor="email">Email</label>
           <input
@@ -164,8 +192,6 @@ const VendorForm = () => {
             placeholder="Vendor Email"
           />
         </div>
-
-        {/* Vendor Phone */}
         <div className={styles.inputGroup}>
           <label htmlFor="phone">Phone</label>
           <input
@@ -177,8 +203,6 @@ const VendorForm = () => {
             placeholder="Vendor Phone"
           />
         </div>
-
-        {/* Vendor Address */}
         <div className={styles.inputGroup}>
           <label htmlFor="address">Address</label>
           <input
@@ -191,91 +215,40 @@ const VendorForm = () => {
           />
         </div>
         <div className={styles.inputGroup}>
-          <label htmlFor="address">Description</label>
+          <label htmlFor="description">Description</label>
           <input
             type="text"
             name="description"
             value={vendorData.description}
             onChange={handleInputChange}
             required
-            placeholder="description"
+            placeholder="Description"
           />
         </div>
-       
-        {/* Vendor Services */}
         <div className={styles.inputGroup}>
           <label htmlFor="services">Services</label>
           <div className={styles.checkboxGroup}>
-            <label>
-              <input
-                type="checkbox"
-                name="services"
-                value="Catering"
-                checked={vendorData.services.includes('Catering')}
-                onChange={handleServiceChange}
-              />
-              Catering
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="services"
-                value="Photography"
-                checked={vendorData.services.includes('Photography')}
-                onChange={handleServiceChange}
-              />
-              Photography
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="services"
-                value="Decoration"
-                checked={vendorData.services.includes('Decoration')}
-                onChange={handleServiceChange}
-              />
-              Decoration
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="services"
-                value="DJ"
-                checked={vendorData.services.includes('DJ')}
-                onChange={handleServiceChange}
-              />
-              DJ
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="services"
-                value="Makeup"
-                checked={vendorData.services.includes('Makeup')}
-                onChange={handleServiceChange}
-              />
-              Makeup
-            </label>
-            <label>
-              <input
-                type="checkbox"
-                name="services"
-                value="Other"
-                checked={vendorData.services.includes('Other')}
-                onChange={handleServiceChange}
-              />
-              Other
-            </label>
+            {['Catering', 'Photography', 'Decoration', 'DJ', 'Makeup', 'Other'].map(service => (
+              <label key={service}>
+                <input
+                  type="checkbox"
+                  name="services"
+                  value={service}
+                  checked={vendorData.services.includes(service)}
+                  onChange={handleServiceChange}
+                />
+                {service}
+              </label>
+            ))}
           </div>
         </div>
-
-        {/* Profile Picture */}
         <div className={styles.inputGroup}>
           <label htmlFor="profilePicUrl">Profile Picture</label>
           <input type="file" onChange={(e) => handleFileChange(e, 'profilePic')} />
+          {vendorData.profilePic[0] && typeof vendorData.profilePic[0] === 'string' && (
+            <img src={vendorData.profilePic[0]} alt="Current Profile" className={styles.previewImage} />
+          )}
         </div>
-
-        {/* Vendor Ratings */}
         <div className={styles.inputGroup}>
           <label htmlFor="ratings">Ratings</label>
           <input
@@ -289,27 +262,25 @@ const VendorForm = () => {
             placeholder="Ratings (0-5)"
           />
         </div>
-
-        {/* Verified Status */}
         <div className={styles.inputGroup}>
           <label htmlFor="isVerified">Verified</label>
           <input
             type="checkbox"
             name="isVerified"
             checked={vendorData.isVerified}
-            onChange={() =>
-              setVendorData((prevData) => ({ ...prevData, isVerified: !prevData.isVerified }))}
+            onChange={() => setVendorData((prev) => ({ ...prev, isVerified: !prev.isVerified }))}
           />
         </div>
       </div>
-
-      {/* Gallery Images */}
       <div className={styles.inputGroup}>
         <label>Gallery Images</label>
         <div className={styles.addgallery}>
           {vendorData.galleryImages.map((image, index) => (
             <div key={index}>
               <input type="file" onChange={(e) => handleFileChange(e, 'galleryImages', index)} />
+              {image.image && typeof image.image === 'string' && (
+                <img src={image.image} alt="Gallery Preview" className={styles.previewImage} />
+              )}
               <input
                 type="text"
                 value={image.title}
@@ -344,16 +315,12 @@ const VendorForm = () => {
           Add Gallery Image
         </button>
       </div>
-
-      {/* Submit Button */}
       <button className={styles.submitButton} type="submit">
-        Submit Vendor
+        {id ? 'Update Vendor' : 'Submit Vendor'}
       </button>
-
-      {/* Success Message Popup */}
       {successMessage && (
         <div className={styles.successPopup}>
-          <p>Vendor successfully created!</p>
+          <p>Vendor {id ? 'updated' : 'created'} successfully!</p>
         </div>
       )}
     </form>

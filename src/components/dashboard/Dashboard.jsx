@@ -46,16 +46,15 @@ const Dashboard = () => {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className={styles.loading}>Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className={styles.error}>{error}</div>;
   }
 
-  // Prepare the data in the required format
-  const chartData = monthlyData.map((value, index) => ({
-    name: value.month,  // Using month as the 'name' for X-axis
+  const chartData = monthlyData.map((value) => ({
+    name: value.month,
     male: value.male,
     female: value.female,
     other: value.other,
@@ -63,58 +62,60 @@ const Dashboard = () => {
 
   return (
     <div className={styles.dashboard}>
-      <h2 className={styles.welcome}>Welcome to Your Profile Dashboard</h2>
+      <h2 className={styles.welcome}>Welcome to Your Matrimony Dashboard</h2>
 
       <div className={styles.statsContainer}>
-        <div className={styles.statBox}>
+        <div className={`${styles.statBox} ${styles.male}`} data-aos="fade-up">
           <h3>Male Profiles</h3>
           <p>{counts.male}</p>
         </div>
-        <div className={styles.statBox}>
+        <div className={`${styles.statBox} ${styles.female}`} data-aos="fade-up" data-aos-delay="100">
           <h3>Female Profiles</h3>
           <p>{counts.female}</p>
         </div>
-        <div className={styles.statBox}>
+        <div className={`${styles.statBox} ${styles.other}`} data-aos="fade-up" data-aos-delay="200">
           <h3>Other Profiles</h3>
           <p>{counts.other}</p>
         </div>
-        <div className={styles.statBox}>
+        <div className={`${styles.statBox} ${styles.total}`} data-aos="fade-up" data-aos-delay="300">
           <h3>Total Profiles</h3>
           <p>{counts.total}</p>
         </div>
       </div>
 
-      <div className={styles.chartContainer}>
+      <div className={styles.chartContainer} data-aos="zoom-in">
         <h3 className={styles.monthly}>Monthly Growth Trend</h3>
-        <ResponsiveContainer width="100%" height={300} className={styles.main}>
-        <BarChart data={chartData} margin={{ top: 0, right: 20, left: 20, bottom: 5 }}>
-  <XAxis dataKey="name" />
-  <YAxis />
-  <Tooltip />
-  <Legend />
-  {/* Male Bar */}
-  <Bar
-    className={styles.bar}
-    dataKey="male"
-    fill="#8884d8"
-    name="Male"
-    barSize={40} // Adjust the bar size width here
-  />
-  {/* Female Bar */}
-  <Bar
-    dataKey="female"
-    fill="#82ca9d"
-    name="Female"
-    barSize={40} // Adjust the bar size width here
-  />
-  {/* Other Bar */}
-  <Bar
-    dataKey="other"
-    fill="#ffc658"
-    name="Other"
-    barSize={40} // Adjust the bar size width here
-  />
-</BarChart>
+        <ResponsiveContainer width="100%" height={400}>
+          <BarChart data={chartData} margin={{ top: 20, right: 30, left: 20, bottom: 10 }}>
+            <XAxis dataKey="name" stroke="black" />
+            <YAxis stroke="black" />
+            <Tooltip contentStyle={{ backgroundColor: "#333", color: "black", borderRadius: "8px" }} />
+            <Legend />
+            <Bar
+              dataKey="male"
+              fill="#1abc9c"
+              name="Male"
+              barSize={60}
+              radius={[12, 12, 0, 0]}
+              animationDuration={1000}
+            />
+            <Bar
+              dataKey="female"
+              fill="#e74c3c"
+              name="Female"
+              barSize={60}
+              radius={[12, 12, 0, 0]}
+              animationDuration={1000}
+            />
+            <Bar
+              dataKey="other"
+              fill="#f39c12"
+              name="Other"
+              barSize={60}
+              radius={[12, 12, 0, 0]}
+              animationDuration={1000}
+            />
+          </BarChart>
         </ResponsiveContainer>
       </div>
     </div>
